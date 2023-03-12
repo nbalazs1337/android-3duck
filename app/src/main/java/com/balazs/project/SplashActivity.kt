@@ -11,11 +11,13 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        TransparentStatusBarHandler.initTransparentStatusBar(window)
+
 
         // Show splash screen for 3 seconds
         Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, WelcomeActivity::class.java))
             finish()
-        }, 5000)
+        }, 3000)
     }
 }
