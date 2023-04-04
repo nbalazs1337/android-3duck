@@ -1,0 +1,81 @@
+package com.balazs.project.presentation
+
+import android.app.Activity
+import android.app.Application
+import android.content.Intent
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.balazs.project.R
+import com.balazs.project.data.model.User
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.common.api.ApiException
+
+
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
+
+
+    private lateinit var googleSignInClient: GoogleSignInClient
+
+    val userLiveData = MutableLiveData<User>()
+    val errorLiveData = MutableLiveData<String>()
+
+    fun initGoogleSignIn() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getApplication<Application>().getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(getApplication<Application>().applicationContext, gso)
+    }
+
+    fun signInWithGoogle(activity: AppCompatActivity, launcher: ActivityResultLauncher<Intent>) {
+        val signInIntent = googleSignInClient.signInIntent
+        launcher.launch(signInIntent)
+    }
+
+    fun handleSignInResult(data: Intent?) {
+        val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+        try {
+            val account = task.getResult(ApiException::class.java)
+            firebaseAuthWithGoogle(account)
+        } catch (e: ApiException) {
+            errorLiveData.postValue(e.message)
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount?) {
+        val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
+        FirebaseAuth.getInstance().signInWithCredential(credential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = User(account!!.email ?: "error", account.displayName)
+                    userLiveData.postValue(user)
+                } else {
+                    errorLiveData.postValue(task.exception?.message ?: "Unknown error occurred")
+                }
+            }
+    }
+
+
+}
+
+
+
+
+
+

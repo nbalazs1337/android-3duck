@@ -1,9 +1,11 @@
-package com.balazs.project
+package com.balazs.project.presentation
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.balazs.project.R
+import com.balazs.project.utils.TransparentStatusBarHandler
 
 class WelcomeActivity: AppCompatActivity() {
 
@@ -13,7 +15,7 @@ class WelcomeActivity: AppCompatActivity() {
         TransparentStatusBarHandler.initTransparentStatusBar(window)
         val button : Button = findViewById<Button>(R.id.button_welcome)
         button.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 

@@ -14,14 +14,16 @@
         <!-- Customize your theme here. -->
         <!-- Transparent status bar. -->
         <item name="android:windowTranslucentStatus">true</item>
+
         <item name="android:windowTranslucentNavigation">true</item>
-        <item name ="android:buttonStyle">@style/ButtonStyle</item>
+
+
 
 
     <!-- Button style !-->
     </style>
-    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/app_green</item>
 
-    </style>
+
+
+
 </resources>
