@@ -19,4 +19,10 @@ class WelcomeActivity: AppCompatActivity() {
             startActivity(intent)
         }
 
+        val btn_home :Button = findViewById(R.id.btn_home)
+        btn_home.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
     }}
