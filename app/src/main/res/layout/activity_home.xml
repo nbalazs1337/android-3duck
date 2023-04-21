@@ -25,6 +25,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
+                app:layout_scrollFlags="scroll|enterAlways"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -38,15 +39,24 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:layout_editor_absoluteX="16dp">
+
                     <Button
                         android:id="@+id/button_signout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sign Out"></Button>
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="230dp"
+                        android:text="Sign Out"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.512"></Button>
 
                     <ImageButton
 
@@ -54,13 +64,15 @@
                         android:layout_height="60dp"
                         android:layout_marginTop="10dp"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/ciolacu"
                         android:background="@drawable/psd_xml"
                         android:contentDescription="yo"
+                        android:layout_marginStart="5dp"
                         android:padding="5dp"
                         android:scaleType="fitCenter"
+                        android:src="@drawable/tenant"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0" />
@@ -69,7 +81,7 @@
                         android:id="@+id/txt_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="100dp"
                         android:layout_marginTop="20dp"
                         android:text="holder"
                         android:textColor="@color/black"
@@ -77,16 +89,16 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.191" />
+                        app:layout_constraintVertical_bias="0.173" />
 
                     <ImageButton
                         android:id="@+id/btn_notifications"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="310dp"
                         android:layout_marginTop="10dp"
                         android:adjustViewBounds="true"
                         android:background="@drawable/circle_background"
@@ -94,17 +106,15 @@
                         android:padding="5dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_notification"
-
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0" />
 
 
-                </LinearLayout>
-
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.appcompat.widget.Toolbar>
 
