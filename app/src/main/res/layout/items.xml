@@ -96,6 +96,7 @@
             android:layout_width="140dp"
             android:layout_height="100dp"
             android:src="@drawable/mock"
+            android:background="@drawable/et_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.49"
