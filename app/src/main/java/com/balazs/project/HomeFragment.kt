@@ -11,7 +11,9 @@ import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.data.model.Data
+import com.balazs.project.data.model.Data2
 import com.balazs.project.presentation.LoginActivity
+import com.balazs.project.utils.SecondAdapter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -55,12 +57,12 @@ class HomeFragment : Fragment() {
         newestRecyclerView.setLayoutManager(
             LinearLayoutManager(
                 context,
-                LinearLayoutManager.HORIZONTAL,
+                LinearLayoutManager.VERTICAL,
                 false
             )
         )
 
-        val imageList = MutableList(20) { i ->
+        val imageList = MutableList(5) { i ->
             Data(
                 R.drawable.mock,
                 "",
@@ -71,7 +73,22 @@ class HomeFragment : Fragment() {
             )
 
         }
-        newestRecyclerView.adapter = Adapter(imageList)
+
+        val imageList2 = MutableList(5) { i ->
+            Data2(
+                R.drawable.tenant,
+                "",
+                "",
+                "",
+                "",
+                R.drawable.ic_location
+
+            )
+
+        }
+
+
+        newestRecyclerView.adapter = SecondAdapter(imageList2)
         recomendedRecyclerView.adapter = Adapter(imageList)
 
 

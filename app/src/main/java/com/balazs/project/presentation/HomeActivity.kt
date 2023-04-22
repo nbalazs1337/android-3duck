@@ -38,7 +38,7 @@ class HomeActivity : AppCompatActivity(){
 
         val email = intent.getStringExtra("email")
         val displayName = intent.getStringExtra("name")
-        findViewById<TextView>(R.id.txt_name).text = "Hello ${displayName}"
+        findViewById<TextView>(R.id.txt_name).text = "Hi, ${displayName}"
 
         findViewById<Button>(R.id.button_signout).setOnClickListener {
             auth.signOut()

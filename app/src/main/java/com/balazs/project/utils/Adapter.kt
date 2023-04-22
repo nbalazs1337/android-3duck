@@ -20,7 +20,7 @@ class Adapter(private val images: List<Data>) :
         holder.iv_photo.setImageResource(R.drawable.mock)
         holder.txt_title.text = "Garsoniera Manastur"
         holder.txt_city.text = "Cluj-Napoca"
-        holder.txt_title.text = "4.3"
+        holder.txt_rating.text = "4.3"
         holder.iv_city.setImageResource(R.drawable.ic_city)
         holder.iv_star.setImageResource(R.drawable.ic_star)
     }

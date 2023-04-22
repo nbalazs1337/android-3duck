@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/search_background"
+        android:background="@drawable/search_bg"
         app:layout_constraintBottom_toTopOf="@+id/constraint_icons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
@@ -25,7 +25,8 @@
         android:id="@+id/constraint_icons"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginBottom="160dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toTopOf="@+id/rv_recomended"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -35,54 +36,56 @@
             android:id="@+id/btn_tenant"
             android:layout_width="74dp"
             android:layout_height="69dp"
+            android:layout_marginStart="10dp"
             android:contentDescription="tenant"
             android:src="@drawable/tenant"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.055"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.491"></ImageButton>
+            app:layout_constraintVertical_bias="0.516"></ImageButton>
 
         <ImageButton
             android:id="@+id/btn_landlord"
             android:layout_width="74dp"
             android:layout_height="69dp"
-            android:layout_marginStart="150dp"
+            android:layout_marginStart="125dp"
             android:contentDescription="landlord"
             android:src="@drawable/tenant"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.055"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.491"></ImageButton>
+            app:layout_constraintVertical_bias="0.516"></ImageButton>
 
         <ImageButton
             android:id="@+id/btn_contractor"
             android:layout_width="74dp"
             android:layout_height="69dp"
-            android:layout_marginStart="300dp"
+            android:layout_marginStart="235dp"
             android:contentDescription="contractor"
             android:src="@drawable/tenant"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.055"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.491"></ImageButton>
+            app:layout_constraintVertical_bias="0.483"></ImageButton>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/txt_recom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
         android:text="Recomended rent"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraint_icons">
 
@@ -92,15 +95,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recomended"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_recom"
-        app:layout_constraintVertical_bias="0.217">
+        app:layout_constraintVertical_bias="0.0">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -123,17 +126,19 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_newest"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
+        android:layout_height="350dp"
+        android:layout_marginHorizontal="10dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_newest"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.0">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
