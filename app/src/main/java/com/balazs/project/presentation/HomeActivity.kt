@@ -56,23 +56,23 @@ class HomeActivity : AppCompatActivity(){
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_home -> {
+                R.id.navigation_tenant -> {
                     navController.navigate(R.id.homeFragment)
-                    item.setIcon(R.drawable.ic_home_green)
+                    //item.setIcon(R.drawable.ic_home_green)
                     item.setCheckable(true)
                     // switch to Home fragment or activity
                     true
                 }
-                R.id.navigation_chat -> {
+                R.id.navigation_landlord -> {
                     navController.navigate(R.id.chatFragment)
-                    item.setIcon(R.drawable.ic_message)
+                    //item.setIcon(R.drawable.ic_message)
                     item.setCheckable(true)
                     // switch to Dashboard fragment or activity
                     true
                 }
-                R.id.navigation_settings -> {
+                R.id.navigation_worker -> {
                     navController.navigate(R.id.settingsFragment)
-                    item.setIcon(R.drawable.ic_settings_green)
+                    //item.setIcon(R.drawable.ic_settings_green)
                     item.setCheckable(true)
                     // switch to Notifications fragment or activity
                     true

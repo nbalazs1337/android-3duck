@@ -1,25 +1,19 @@
 package com.balazs.project
 
 import Adapter
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.data.model.Data
 import com.balazs.project.data.model.Data2
-import com.balazs.project.presentation.LoginActivity
 import com.balazs.project.utils.SecondAdapter
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
 
 
-class HomeFragment : Fragment() {
+class TenantFragment : Fragment() {
     private lateinit var recomendedRecyclerView: RecyclerView
     private lateinit var newestRecyclerView: RecyclerView
 
@@ -34,7 +28,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_tenant, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

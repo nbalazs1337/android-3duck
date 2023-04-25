@@ -1,14 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigation_home"
-        android:title="Home"
-        android:icon="@drawable/ic_home"/>
+        android:id="@+id/navigation_tenant"
+        android:title="Tenant"
+        android:icon="@drawable/ic_tenant"/>
     <item
-        android:id="@+id/navigation_chat"
-        android:title="Messages"
-        android:icon="@drawable/ic_chat" />
+        android:id="@+id/navigation_landlord"
+        android:title="Landlord"
+        android:icon="@drawable/ic_landlord" />
     <item
-        android:id="@+id/navigation_settings"
-        android:title="Settings"
-        android:icon="@drawable/ic_settings" />
+        android:id="@+id/navigation_worker"
+        android:title="Worker"
+        android:icon="@drawable/ic_worker" />
 </menu>

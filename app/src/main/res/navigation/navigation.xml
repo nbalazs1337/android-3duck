@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.balazs.project.HomeFragment"
+        android:name="com.balazs.project.TenantFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_tenant" >
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.balazs.project.ChatFragment"
+        android:name="com.balazs.project.LandlordFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_landlord" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.balazs.project.SettingsFragment"
+        android:name="com.balazs.project.WorkerFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_worker" />
 </navigation>
