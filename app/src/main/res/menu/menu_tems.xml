@@ -2,13 +2,14 @@
     <item
         android:id="@+id/navigation_tenant"
         android:title="Tenant"
-        android:icon="@drawable/ic_tenant"/>
+        android:iconTint="@color/black"
+        android:icon="@drawable/selector_tenant"/>
     <item
         android:id="@+id/navigation_landlord"
         android:title="Landlord"
-        android:icon="@drawable/ic_landlord" />
+        android:icon="@drawable/selector_landlord" />
     <item
         android:id="@+id/navigation_worker"
         android:title="Worker"
-        android:icon="@drawable/ic_worker" />
+        android:icon="@drawable/selector_worker" />
 </menu>

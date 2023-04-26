@@ -17,6 +17,19 @@
 
         <item name="android:windowTranslucentNavigation">true</item>
 
+        <style name="AppThemeWithDrawer" parent="AppTheme">
+            <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+            <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+            <item name="android:windowBackground">@color/colorBackground</item>
+            <item name="android:background">@color/colorBackground</item>
+            <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+            <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+            <item name="android:colorControlNormal">@color/colorControlNormal</item>
+            <item name="android:colorControlActivated">@color/colorControlActivated</item>
+            <item name="android:colorControlHighlight">@color/colorControlHighlight</item>
+            <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        </style>
+
 
 
 
