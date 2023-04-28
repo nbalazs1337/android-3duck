@@ -22,23 +22,51 @@
         app:layout_constraintVertical_bias="0.086"></androidx.appcompat.widget.SearchView>
 
 
-
     <TextView
         android:id="@+id/txt_recom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="5dp"
-        android:text="Top Rated workers"
+        android:layout_marginTop="10dp"
+        android:text="Offers near you"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintHorizontal_bias="0.003"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_view">
 
 
     </TextView>
+
+    <TextView
+        android:id="@+id/txt_recom2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:text="See All"
+        android:textColor="@color/app_green"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.874"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_view">
+
+    </TextView>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_right"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_recom2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txt_recom2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"></ImageButton>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recomended"
@@ -48,43 +76,12 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_recom"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.042">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <TextView
-        android:id="@+id/txt_newest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="New workers"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_recomended">
-
-
-    </TextView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_newest"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginHorizontal="10dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_newest"
-        app:layout_constraintVertical_bias="0.0">
-
-    </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

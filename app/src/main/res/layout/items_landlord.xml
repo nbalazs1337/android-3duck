@@ -4,24 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="10dp"
+    android:padding="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginHorizontal="10dp"
+    android:background="@drawable/et_background"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    android:layout_marginHorizontal="10dp"
-    android:background="@drawable/et_background"
-    android:layout_marginVertical="10dp"
     app:layout_constraintVertical_bias="0.5">
 
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="120dp"
+        android:text="Kovacs Attila"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></TextView>
+
+    <TextView
+        android:id="@+id/txt_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="7dp"
+        android:text="BathRoom tap repair"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/iv_mock"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        app:layout_constraintVertical_bias="0.019"></TextView>
+
+    <TextView
+        android:id="@+id/txt_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="$50"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintStart_toEndOf="@+id/txt_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></TextView>
+
     <ImageView
-        android:id="@+id/img_new"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/tenant"
-        android:scaleType = "centerCrop"
-        android:background="@drawable/et_background"
+        android:id="@+id/iv_mock"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_img"
+        android:scaleType="centerCrop"
+        android:src="@drawable/worker"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -29,60 +75,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"></ImageView>
 
-    <TextView
-        android:id="@+id/txt_title_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginTop="16dp"
-        android:text="Andrei Alexandrescu"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_new"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
-
-    <TextView
-        android:id="@+id/txt_subtitle_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="12dp"
-        android:text="5$/h"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/img_new"
-        app:layout_constraintTop_toBottomOf="@id/txt_title_new"></TextView>
-
     <ImageView
-        android:id="@+id/img_location"
+        android:id="@+id/iv_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_location"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="160dp"
+        android:background="@drawable/et_background"
+        android:padding="3dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/img_new"
-        app:layout_constraintTop_toBottomOf="@id/txt_subtitle_new"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@+id/iv_mock"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"></ImageView>
-
-    <TextView
-        android:id="@+id/txt_location_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Cluj-Napoca"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/img_location"
-        app:layout_constraintTop_toBottomOf="@id/txt_subtitle_new"></TextView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
