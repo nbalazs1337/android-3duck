@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.balazs.project.data.model.Data
-import com.balazs.project.data.model.Data2
+import com.balazs.project.data.model.DataTenant
+import com.balazs.project.data.model.DataTenant2
 import com.balazs.project.utils.SecondAdapter
 
 
@@ -57,7 +57,7 @@ class TenantFragment : Fragment() {
         )
 
         val imageList = MutableList(5) { i ->
-            Data(
+            DataTenant(
                 R.drawable.mock,
                 "",
                 "",
@@ -69,7 +69,7 @@ class TenantFragment : Fragment() {
         }
 
         val imageList2 = MutableList(5) { i ->
-            Data2(
+            DataTenant2(
                 R.drawable.tenant,
                 "",
                 "",

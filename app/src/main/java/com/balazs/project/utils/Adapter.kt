@@ -5,9 +5,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
-import com.balazs.project.data.model.Data
+import com.balazs.project.data.model.DataTenant
 
-class Adapter(private val images: List<Data>) :
+class Adapter(private val images: List<DataTenant>) :
     RecyclerView.Adapter<Adapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {

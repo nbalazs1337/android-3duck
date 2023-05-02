@@ -12,19 +12,27 @@
         tools:layout="@layout/fragment_tenant" >
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/workerFragment" />
         <action
             android:id="@+id/action_homeFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
+            app:destination="@id/landlordFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
-        android:id="@+id/chatFragment"
+        android:id="@+id/landlordFragment"
         android:name="com.balazs.project.LandlordFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_landlord" />
     <fragment
-        android:id="@+id/settingsFragment"
+        android:id="@+id/workerFragment"
         android:name="com.balazs.project.WorkerFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_worker" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.balazs.project.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>

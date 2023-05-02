@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:layout_marginTop="10dp"
-    android:layout_marginHorizontal="10dp"
     android:background="@drawable/et_background"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -17,54 +16,38 @@
 
 
     <TextView
-        android:id="@+id/txt_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="120dp"
-        android:text="Kovacs Attila"
-        android:textColor="@color/black"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"></TextView>
-
-    <TextView
-        android:id="@+id/txt_city"
+        android:id="@+id/txt_title_landlord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="7dp"
         android:text="BathRoom tap repair"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/iv_mock"
-        app:layout_constraintTop_toBottomOf="@id/txt_title"
-        app:layout_constraintVertical_bias="0.019"></TextView>
+        app:layout_constraintStart_toEndOf="@+id/iv_mock_landlord"></TextView>
 
     <TextView
-        android:id="@+id/txt_rating"
+        android:id="@+id/txt_price_landlord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:text="$50"
         android:textColor="@color/black"
-        android:textSize="10sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.222"
-        app:layout_constraintStart_toEndOf="@+id/txt_title"
+        app:layout_constraintHorizontal_bias="0.682"
+        app:layout_constraintStart_toEndOf="@+id/txt_name_landlord"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"></TextView>
+        app:layout_constraintVertical_bias="0.266"></TextView>
 
     <ImageView
-        android:id="@+id/iv_mock"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:id="@+id/iv_mock_landlord"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/rounded_img"
         android:scaleType="centerCrop"
         android:src="@drawable/worker"
@@ -76,19 +59,32 @@
         app:layout_constraintVertical_bias="0.0"></ImageView>
 
     <ImageView
-        android:id="@+id/iv_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="160dp"
+        android:id="@+id/iv_right_landlord"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="260dp"
         android:background="@drawable/et_background"
         android:padding="3dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/iv_mock"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toEndOf="@+id/iv_mock_landlord"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"></ImageView>
+
+    <TextView
+        android:id="@+id/txt_name_landlord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kovacs Attila"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/txt_title_landlord"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toEndOf="@+id/iv_mock_landlord"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.666" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

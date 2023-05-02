@@ -5,9 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.balazs.project.data.model.DataLandlord
+import com.balazs.project.data.model.DataWorker
+import com.balazs.project.utils.LandlordAdapter
+import com.balazs.project.utils.WorkerAdapter
 
 class LandlordFragment : Fragment() {
-
+    private lateinit var rv_landlord: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -20,4 +26,40 @@ class LandlordFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_landlord, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        super.onViewCreated(view, savedInstanceState)
+
+        rv_landlord = view.findViewById(R.id.rv_landlord_recom)
+        rv_landlord.setHasFixedSize(true)
+        rv_landlord.setLayoutManager(
+            LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+        )
+
+
+        val imageList = MutableList(5) { i ->
+            DataLandlord(
+                R.drawable.hammer,
+                "",
+                "",
+                "",
+                R.drawable.ic_city,
+
+            )
+
+        }
+
+        rv_landlord.adapter = LandlordAdapter(imageList)
+
+
+
+    }
+
+
+
     }

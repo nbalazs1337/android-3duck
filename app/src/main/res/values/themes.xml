@@ -16,7 +16,7 @@
         <item name="android:windowTranslucentStatus">true</item>
 
         <item name="android:windowTranslucentNavigation">true</item>
-
+        <item name="drawerArrowStyle">@style/DrawerIcon</item>
 
 
 
@@ -25,7 +25,9 @@
     <!-- Button style !-->
     </style>
 
-
+<style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle">
+    <item name = "colorControlNormal">#FF0000</item>
+</style>
 
 
 </resources>

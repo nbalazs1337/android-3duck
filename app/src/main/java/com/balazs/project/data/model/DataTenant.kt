@@ -1,6 +1,6 @@
 package com.balazs.project.data.model
 
-data class Data(
+data class DataTenant(
     val iv_coverID: Int,
     val txt_title: String,
     val txt_city: String,

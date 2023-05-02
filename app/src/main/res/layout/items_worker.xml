@@ -15,7 +15,7 @@
     app:layout_constraintVertical_bias="0.5">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_new"
+        android:id="@+id/iv_new"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
@@ -30,7 +30,7 @@
         app:layout_constraintVertical_bias="0.0"></de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
-        android:id="@+id/txt_subtitle_new"
+        android:id="@+id/txt_type_worker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -40,13 +40,13 @@
         android:text="Contract"
         android:textColor="@color/white"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/txt_subtitle_new2"
+        app:layout_constraintEnd_toStartOf="@+id/txt_type_worker2"
         app:layout_constraintHorizontal_bias="0.866"
-        app:layout_constraintStart_toEndOf="@+id/img_new"
+        app:layout_constraintStart_toEndOf="@+id/iv_new"
         app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <TextView
-        android:id="@+id/txt_subtitle_new3"
+        android:id="@+id/txt_title_worker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -56,10 +56,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_new"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/iv_new"></TextView>
 
     <TextView
-        android:id="@+id/txt_subtitle_new4"
+        android:id="@+id/txt_city_worker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -68,23 +68,23 @@
         android:textColor="@color/black"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_subtitle_new3"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/txt_title_worker"></TextView>
 
     <TextView
-        android:id="@+id/txt_subtitle_new5"
+        android:id="@+id/txt_price_worker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="30-50$"
         android:textColor="@color/black"
-        android:textSize="10sp"
+        android:textSize="13sp"
         app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.303"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_location"></TextView>
 
     <TextView
-        android:id="@+id/txt_subtitle_new2"
+        android:id="@+id/txt_type_worker2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -96,7 +96,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/img_new"
+        app:layout_constraintStart_toEndOf="@+id/iv_new"
         app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <ImageView
@@ -105,22 +105,22 @@
         android:layout_height="21dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_location"
-        app:layout_constraintEnd_toStartOf="@+id/txt_subtitle_new4"
+        app:layout_constraintEnd_toStartOf="@+id/txt_city_worker"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_subtitle_new3"></ImageView>
+        app:layout_constraintTop_toBottomOf="@+id/txt_title_worker"></ImageView>
 
     <Button
         android:id="@+id/button"
         android:layout_width="94dp"
         android:layout_height="36dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="@color/app_search"
         android:text="Apply"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_subtitle_new4"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_city_worker"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
