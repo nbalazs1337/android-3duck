@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,10 +40,17 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         TransparentStatusBarHandler.initTransparentStatusBar(window)
         setContentView(R.layout.activity_log_in)
-        val txt_signUp : TextView = findViewById(R.id.txt_signin)
 
+        val txt_signUp : TextView = findViewById(R.id.txt_signin)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         viewModel.initGoogleSignIn()
+
+        findViewById<Button>(R.id.button_register).setOnClickListener {
+            val email = findViewById<EditText>(R.id.et_email).text.toString()
+            val pass = findViewById<EditText>(R.id.et_pass_enter).text.toString()
+            viewModel.signInWithEmail(email, pass)
+
+        }
 
         findViewById<Button>(R.id.button_google).setOnClickListener {
             viewModel.signInWithGoogle(this, launcher)
@@ -60,6 +68,15 @@ class LoginActivity : AppCompatActivity() {
         viewModel.errorLiveData.observe(this, { errorMessage ->
             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()})
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
 

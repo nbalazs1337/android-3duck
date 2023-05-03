@@ -11,6 +11,7 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
+        app:iconifiedByDefault="false"
         android:layout_height="wrap_content"
         app:defaultQueryHint="Search for a job"
         android:layout_marginHorizontal="20dp"

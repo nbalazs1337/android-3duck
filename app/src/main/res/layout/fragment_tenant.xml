@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        app:iconifiedByDefault="false"
         app:defaultQueryHint="Search for a rent"
         android:autofillHints="Search for rent"
         android:background="@drawable/search_bg"

@@ -1,3 +1,4 @@
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -6,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
 import com.balazs.project.data.model.DataTenant
+import com.balazs.project.presentation.RentDetailActivity
 
 class Adapter(private val images: List<DataTenant>) :
     RecyclerView.Adapter<Adapter.ImageViewHolder>() {
@@ -16,13 +18,19 @@ class Adapter(private val images: List<DataTenant>) :
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-
+        val currentItem = images[position]
         holder.iv_photo.setImageResource(R.drawable.mock)
         holder.txt_title.text = "Garsoniera Manastur"
         holder.txt_city.text = "Cluj-Napoca"
         holder.txt_rating.text = "4.3"
         holder.iv_city.setImageResource(R.drawable.ic_city)
         holder.iv_star.setImageResource(R.drawable.ic_star)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, RentDetailActivity::class.java)
+            //intent.putExtra("item_id", currentItem.id) // pass any data to the next activity
+            holder.itemView.context.startActivity(intent)
+        }
+
     }
 
     override fun getItemCount(): Int {

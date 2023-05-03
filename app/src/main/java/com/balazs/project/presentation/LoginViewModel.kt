@@ -30,7 +30,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
 
     private lateinit var googleSignInClient: GoogleSignInClient
-
+    private val auth = FirebaseAuth.getInstance()
     val userLiveData = MutableLiveData<User>()
     val errorLiveData = MutableLiveData<String>()
 
@@ -64,6 +64,18 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val user = User(account!!.email ?: "error", account.displayName)
+                    userLiveData.postValue(user)
+                } else {
+                    errorLiveData.postValue(task.exception?.message ?: "Unknown error occurred")
+                }
+            }
+    }
+
+    fun signInWithEmail(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = User(email, auth.currentUser?.displayName)
                     userLiveData.postValue(user)
                 } else {
                     errorLiveData.postValue(task.exception?.message ?: "Unknown error occurred")

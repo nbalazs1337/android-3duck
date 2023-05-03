@@ -31,6 +31,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         TransparentStatusBarHandler.initTransparentStatusBar(window)
+
         viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
         auth = FirebaseAuth.getInstance()
         txt_name = findViewById(R.id.et_name)

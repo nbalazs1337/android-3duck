@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:defaultQueryHint="Search for a worker"
+        app:iconifiedByDefault="false"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/search_bg"
         app:layout_constraintBottom_toTopOf="@+id/rv_landlord_recom"
