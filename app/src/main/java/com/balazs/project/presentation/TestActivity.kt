@@ -1,4 +1,4 @@
-package com.dimaswisodewo.weatherapp.view
+package com.balazs.project.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +13,7 @@ import com.balazs.project.presentation.viewmodel.TestVM
 
 import java.lang.StringBuilder
 
-class MainActivity : AppCompatActivity() {
+class TestActivity : AppCompatActivity() {
 
     private lateinit var mainViewModel: TestVM
 

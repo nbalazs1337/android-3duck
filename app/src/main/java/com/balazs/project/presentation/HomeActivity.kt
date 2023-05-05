@@ -2,17 +2,13 @@ package com.balazs.project.presentation
 
 import android.R
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.widget.Toolbar;
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -49,6 +45,12 @@ class HomeActivity : AppCompatActivity() {
         val notiButton: ImageButton = findViewById(com.balazs.project.R.id.btn_notifications)
         notiButton.setOnClickListener {
             val intent = Intent(this, NotificationActivity::class.java)
+            startActivity(intent)
+        }
+
+        val test_text :TextView = findViewById(com.balazs.project.R.id.txt_name)
+        test_text.setOnClickListener {
+            val intent = Intent(this, TestActivity::class.java)
             startActivity(intent)
         }
 

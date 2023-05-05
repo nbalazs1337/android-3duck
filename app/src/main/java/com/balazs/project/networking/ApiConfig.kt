@@ -30,6 +30,6 @@ class ApiConfig {
             return retrofit.create(ApiService::class.java)
         }
 
-        const val API_KEY = "Your API Key"
+        const val API_KEY = "52583f1df5784005af5133250230405"
     }
 }
