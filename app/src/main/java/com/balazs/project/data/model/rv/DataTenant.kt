@@ -1,4 +1,4 @@
-package com.balazs.project.data.model
+package com.balazs.project.data.model.rv
 
 data class DataTenant(
     val iv_coverID: Int,

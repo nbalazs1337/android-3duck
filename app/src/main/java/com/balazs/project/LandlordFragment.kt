@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.balazs.project.data.model.DataLandlord
-import com.balazs.project.data.model.DataWorker
+import com.balazs.project.data.model.rv.DataLandlord
 import com.balazs.project.utils.LandlordAdapter
-import com.balazs.project.utils.WorkerAdapter
 
 class LandlordFragment : Fragment() {
     private lateinit var rv_landlord: RecyclerView

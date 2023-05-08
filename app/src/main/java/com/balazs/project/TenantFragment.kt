@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.balazs.project.data.model.DataTenant
-import com.balazs.project.data.model.DataTenant2
+import com.balazs.project.data.model.rv.DataTenant
+import com.balazs.project.data.model.rv.DataTenant2
 import com.balazs.project.utils.SecondAdapter
 
 

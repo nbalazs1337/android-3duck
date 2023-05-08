@@ -1,5 +1,6 @@
-package com.balazs.project.presentation
+package com.balazs.project.presentation;
 
+import com.balazs.project.TestActivity
 import android.R
 import android.content.Intent
 import android.os.Build
@@ -52,6 +53,7 @@ class HomeActivity : AppCompatActivity() {
         test_text.setOnClickListener {
             val intent = Intent(this, TestActivity::class.java)
             startActivity(intent)
+
         }
 
 

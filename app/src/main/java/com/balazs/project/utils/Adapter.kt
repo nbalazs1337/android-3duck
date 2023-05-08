@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
-import com.balazs.project.data.model.DataTenant
+import com.balazs.project.data.model.rv.DataTenant
 import com.balazs.project.presentation.RentDetailActivity
 
 class Adapter(private val images: List<DataTenant>) :

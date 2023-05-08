@@ -7,8 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
-import com.balazs.project.data.model.DataLandlord
-import com.balazs.project.data.model.DataTenant2
+import com.balazs.project.data.model.rv.DataLandlord
 
 class LandlordAdapter(private val images: List<DataLandlord>) :
     RecyclerView.Adapter<LandlordAdapter.ImageViewHolder>()  {

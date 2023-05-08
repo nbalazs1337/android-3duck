@@ -1,17 +1,20 @@
-package com.balazs.project.networking
-
-import com.balazs.project.data.model.CurrentWeatherResponse
+import com.balazs.project.data.model.api.SearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-
-    // Get current weather data
-    @GET("current.json")
-    fun getCurrentWeather(
-        @Query("key") key: String = ApiConfig.API_KEY,
-        @Query("q") city: String,
-        @Query("aqi") aqi: String = "no"
-    ): Call<CurrentWeatherResponse>
+    @GET("search")
+    fun searchProperties(
+        @Query("locale") locale: String,
+        @Query("maxItems") maxItems: Int,
+        @Query("numPage") numPage: Int,
+        @Query("operation") operation: String,
+        @Query("order") order: String,
+        @Query("propertyType") propertyType: String,
+        @Query("sort") sort: String,
+        @Query("t") t: Long,
+        @Query("language") language: String,
+        @Query("locationId") locationId: String
+    ): Call<SearchResponse>
 }

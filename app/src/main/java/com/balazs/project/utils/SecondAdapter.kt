@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
-import com.balazs.project.data.model.DataTenant2
+import com.balazs.project.data.model.rv.DataTenant2
 
 class SecondAdapter(private val images: List<DataTenant2>) :
     RecyclerView.Adapter<SecondAdapter.ImageViewHolder>()  {

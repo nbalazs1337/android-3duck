@@ -8,8 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
-import com.balazs.project.data.model.DataTenant2
-import com.balazs.project.data.model.DataWorker
+import com.balazs.project.data.model.rv.DataWorker
 
 class WorkerAdapter(private val images: List<DataWorker>) :
     RecyclerView.Adapter<WorkerAdapter.ImageViewHolder>()  {
