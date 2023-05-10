@@ -1,3 +1,4 @@
+/*
 package com.balazs.project.networking
 
 import com.google.gson.annotations.SerializedName
@@ -8,3 +9,4 @@ data class AccessTokenResponse(
     @field:SerializedName("expires_in") val expiresIn: Int,
     @field:SerializedName("scope") val scope: String
 )
+*/

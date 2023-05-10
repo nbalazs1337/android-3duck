@@ -1,3 +1,4 @@
+/*
 import okhttp3.Authenticator
 import okhttp3.Credentials
 import okhttp3.Request
@@ -14,3 +15,4 @@ class OAuth2Authenticator(private val apiKey: String, private val secret: String
             .build()
     }
 }
+*/

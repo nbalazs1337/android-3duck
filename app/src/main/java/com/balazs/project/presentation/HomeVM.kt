@@ -1,13 +1,12 @@
 package com.balazs.project.presentation
 
-import android.graphics.ColorSpace
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.balazs.project.data.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
-class HomeViewModel:ViewModel() {
+class HomeVM:ViewModel() {
 
     private lateinit var googleSignInClient: GoogleSignInClient
 

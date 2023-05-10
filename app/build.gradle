@@ -2,20 +2,21 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
-   // id("com.google.dagger.hilt.android")
+    id 'kotlin-kapt'
 
 }
 
 android {
     compileSdk 33
-
+    packagingOptions {
+        exclude 'META-INF/gradle/incremental.annotation.processors'
+    }
     defaultConfig {
         applicationId "com.balazs.project"
         minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -49,12 +50,15 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
     // Google Sign-In
     implementation platform('com.google.firebase:firebase-bom:31.2.3')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
     //UI
     implementation("androidx.drawerlayout:drawerlayout:1.2.0")
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     //Networking
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -63,8 +67,33 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     //implementation 'com.squareup.okhttp3:okhttp-oauth:4.9.0'
-    //implementation("com.google.dagger:hilt-android:2.44")
-    //implementation("com.google.dagger:hilt-android-compiler:2.44")
+
+    //DI
+   // implementation("com.google.dagger:hilt-android:2.44")
+   // implementation("com.google.dagger:hilt-android-compiler:2.44")
+   // kapt 'com.google.dagger:hilt-android-compiler:2.44'
+    //implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+
+    implementation "androidx.room:room-runtime:2.4.0"
+    kapt "androidx.room:room-compiler:2.4.0"
+    implementation 'androidx.room:room-ktx:2.4.0'
+
+
+    implementation "com.google.dagger:dagger:2.38.1"
+    kapt "com.google.dagger:dagger-compiler:2.38.1"
+    implementation 'com.google.dagger:dagger-android-support:2.38.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+
+
+
+
+
+
+
 
 }
+
+
+
 

@@ -1,3 +1,4 @@
+/*
 package com.balazs.project
 
 import androidx.appcompat.app.AppCompatActivity
@@ -6,9 +7,13 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.balazs.project.data.model.api.SearchResponse
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class TestActivity : AppCompatActivity() {
+
 
     lateinit var viewModel: TestVM
 
@@ -56,3 +61,4 @@ class TestActivity : AppCompatActivity() {
         resultTextView.text = "Error: $error"
     }
 }
+*/

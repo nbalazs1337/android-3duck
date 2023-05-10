@@ -1,10 +1,12 @@
 package com.balazs.project.presentation;
 
-import com.balazs.project.TestActivity
+//import com.balazs.project.TestActivity
+import AppComponent
 import android.R
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 
 import android.widget.ImageButton
@@ -14,8 +16,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.room.Room
+import com.balazs.project.MyApplication
+import com.balazs.project.persistence.AppDatabase
+import com.balazs.project.persistence.localApi.WorkerApi
+import com.balazs.project.persistence.model.WorkerDB
 import com.balazs.project.utils.TransparentStatusBarHandler
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -23,6 +31,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
 
@@ -34,10 +44,17 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: Toolbar
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.balazs.project.R.layout.activity_home)
         TransparentStatusBarHandler.initTransparentStatusBar(window)
+        val appDatabase = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "my-database").build()
+
+        //val workers = workerApi.getAllWorkers()
+        // Create a new worker
+
+
         auth = FirebaseAuth.getInstance()
         val navHostFragment =
             supportFragmentManager.findFragmentById(com.balazs.project.R.id.fragment) as NavHostFragment
@@ -49,12 +66,12 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val test_text :TextView = findViewById(com.balazs.project.R.id.txt_name)
+        /*val test_text :TextView = findViewById(com.balazs.project.R.id.txt_name)
         test_text.setOnClickListener {
             val intent = Intent(this, TestActivity::class.java)
             startActivity(intent)
 
-        }
+        }*/
 
 
         val email = intent.getStringExtra("email")

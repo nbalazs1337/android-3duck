@@ -1,9 +1,13 @@
+/*
 import com.balazs.project.data.model.api.SearchResponse
+import dagger.Provides
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
+import javax.inject.Inject
 
 interface ApiService {
+
     @GET("search")
     fun searchProperties(
         @Query("locale") locale: String,
@@ -18,3 +22,4 @@ interface ApiService {
         @Query("locationId") locationId: String
     ): Call<SearchResponse>
 }
+*/

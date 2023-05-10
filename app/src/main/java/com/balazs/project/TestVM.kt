@@ -1,3 +1,4 @@
+/*
 package com.balazs.project
 
 import ApiService
@@ -6,11 +7,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.balazs.project.data.model.api.SearchResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class TestVM(private val apiService: ApiService) : ViewModel() {
+@HiltViewModel
+class TestVM @Inject constructor(private val apiService: ApiService) : ViewModel() {
 
     val _propertySearchResult = MutableLiveData<SearchResponse?>()
     val propertySearchResult: LiveData<SearchResponse?> = _propertySearchResult
@@ -62,3 +66,4 @@ class TestVM(private val apiService: ApiService) : ViewModel() {
         })
     }
 }
+*/

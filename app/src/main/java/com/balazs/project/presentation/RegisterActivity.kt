@@ -1,15 +1,12 @@
 package com.balazs.project.presentation
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.balazs.project.R
@@ -24,7 +21,7 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var txt_confirmPassword: EditText
     lateinit var txt_SignIn : TextView
     private lateinit var auth: FirebaseAuth
-    private lateinit var viewModel: RegisterViewModel
+    private lateinit var viewModel: RegisterVM
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
         TransparentStatusBarHandler.initTransparentStatusBar(window)
 
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(RegisterVM::class.java)
         auth = FirebaseAuth.getInstance()
         txt_name = findViewById(R.id.et_name)
         txt_email = findViewById(R.id.et_email)

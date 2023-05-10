@@ -1,3 +1,4 @@
+/*
 package com.balazs.project.networking
 
 import retrofit2.Call
@@ -13,4 +14,4 @@ interface AuthService {
         @Field("client_id") clientId: String,
         @Field("client_secret") clientSecret: String
     ): Call<AccessTokenResponse>
-}
+}*/
