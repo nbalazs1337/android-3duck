@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +21,11 @@ import javax.inject.Inject
 class WorkerFragment : Fragment() {
 
     private lateinit var rv_worker: RecyclerView
+
     @Inject
     lateinit var workerViewModelFactory: ViewModelProvider.Factory
-    lateinit var workerViewModel: WorkerViewModel
+    private val workerViewModel: WorkerViewModel by viewModels { workerViewModelFactory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -39,12 +43,12 @@ class WorkerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+
         // Fetch worker data using the WorkerApi
-        workerViewModel = ViewModelProvider(this, workerViewModelFactory).get(WorkerViewModel::class.java)
-                workerViewModel.workersLiveData.observe(viewLifecycleOwner) { workers ->
-                    // Update UI with worker data
-                    Log.d("tag2", "${workers}")
-                }
+        workerViewModel.workersLiveData.observe(viewLifecycleOwner) { workers ->
+            // Update UI with worker data
+            Log.d("tag2", "${workers}")
+        }
 
 
 
@@ -76,7 +80,6 @@ class WorkerFragment : Fragment() {
         rv_worker.adapter = WorkerAdapter(imageList)
 
 
-
     }
 
-    }
+}
