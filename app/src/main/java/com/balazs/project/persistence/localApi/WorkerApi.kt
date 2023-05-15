@@ -18,11 +18,19 @@ class WorkerApi(private val workerDao: WorkerDao) {
             workerDao.getAllWorkers()
         }
 
-   /* fun updateWorker(worker: WorkerDB) {
-        workerDao.updateWorker(worker)
+
+        /* fun updateWorker(worker: WorkerDB) {
+             workerDao.updateWorker(worker)
+         }
+
+         fun deleteWorker(worker: WorkerDB) {
+             workerDao.deleteWorker(worker)
+         }*/
     }
 
-    fun deleteWorker(worker: WorkerDB) {
-        workerDao.deleteWorker(worker)
-    }*/
-}}
+    suspend fun deleteAllWorkers() {
+        withContext(Dispatchers.IO) {
+            workerDao.deleteAllWorkers()
+        }
+    }
+}

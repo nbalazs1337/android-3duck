@@ -16,9 +16,12 @@ interface WorkerDao {
     @Insert
     suspend fun insertWorker(worker: WorkerDB)
 
+    @Query("DELETE FROM workers")
+    suspend fun deleteAllWorkers()
+}
    /* @Update
     suspend fun updateWorker(worker: WorkerDB)
 
     @Delete
     suspend fun deleteWorker(worker: WorkerDB)*/
-}
+

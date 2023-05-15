@@ -8,7 +8,7 @@ data class WorkerDB(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val name: String,
-    val specialization: String,
-    val experienceYears: Int,
+    val city: String,
+    val type: String,
     val pricePerHour: Double
 )

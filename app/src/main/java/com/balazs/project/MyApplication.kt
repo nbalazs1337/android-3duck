@@ -19,6 +19,6 @@ class MyApplication : Application() {
         // Example: Initialize logging, analytics, or other libraries
 
         // Initialize Dagger component
-        appComponent.inject(HomeActivity())
+        appComponent.inject(WorkerFragment())
     }
 }

@@ -2,6 +2,8 @@ package com.balazs.project.presentation;
 
 //import com.balazs.project.TestActivity
 import AppComponent
+import AppDatabase
+import AppModule
 import android.R
 import android.content.Intent
 import android.os.Build
@@ -34,6 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 class HomeActivity : AppCompatActivity() {
 
 
@@ -43,17 +46,31 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navigationView: NavigationView
     private lateinit var toolbar: Toolbar
-
+    @Inject
+    lateinit var workerApi: WorkerApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.balazs.project.R.layout.activity_home)
         TransparentStatusBarHandler.initTransparentStatusBar(window)
         val appDatabase = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "my-database").build()
+        //deleteAllWorkers()
+        // Initialize Dagger
+        val appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(applicationContext))
+            .build()
 
+        // Inject dependencies
+        appComponent.inject(this)
         //val workers = workerApi.getAllWorkers()
         // Create a new worker
-
+       /* val worker = WorkerDB(
+            name = "Bathroom Tap Changer",
+            city = "Cluj-Napoca",
+            type = "contract",
+            pricePerHour = 20.0
+        )
+        addWorker(worker)*/
 
         auth = FirebaseAuth.getInstance()
         val navHostFragment =
@@ -201,6 +218,18 @@ class HomeActivity : AppCompatActivity() {
     private fun dpToPx(dp: Int): Int {
         val density = resources.displayMetrics.density
         return (dp.toFloat() * density + 0.5f).toInt()
+    }
+
+    private fun addWorker(worker: WorkerDB) {
+        // Invoke the addWorker method of WorkerApi to add the worker
+        lifecycleScope.launch {
+            workerApi.addWorker(worker)
+        }
+    }
+    private fun deleteAllWorkers() {
+        lifecycleScope.launch {
+            workerApi.deleteAllWorkers()
+        }
     }
 }
 

@@ -1,4 +1,5 @@
 import com.balazs.project.MyApplication
+import com.balazs.project.WorkerFragment
 import com.balazs.project.WorkerViewModel
 import com.balazs.project.presentation.HomeActivity
 import dagger.Component
@@ -10,6 +11,7 @@ import javax.inject.Singleton
 interface AppComponent {
 
 
-    fun inject(activity: HomeActivity)
-    fun inject(workerViewModel: WorkerViewModel)
+
+    fun inject(workerFragment: WorkerFragment)
+    fun inject(homeActivity: HomeActivity)
 }

@@ -43,8 +43,10 @@ class WorkerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-
+        (requireActivity().application as MyApplication).appComponent.inject(this)
         // Fetch worker data using the WorkerApi
+
+        val workers = workerViewModel.loadWorkers()
         workerViewModel.workersLiveData.observe(viewLifecycleOwner) { workers ->
             // Update UI with worker data
             Log.d("tag2", "${workers}")
