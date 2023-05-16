@@ -57,7 +57,7 @@ class WorkerFragment : Fragment() {
         )
         workerViewModel.workersLiveData.observe(viewLifecycleOwner) { workers ->
             // Update UI with worker data
-            Log.d("tag2", "${workers}")
+            Log.d("yoyo", "${workers}")
             val dataWorkers = workers.map { worker ->
                 DataWorker(
                     // Map the properties from WorkerDB to DataWorker
@@ -66,7 +66,6 @@ class WorkerFragment : Fragment() {
                     txt_title = worker.name,
                     txt_city = worker.city,
                     txt_type = worker.type,
-                    txt_type2 = worker.type,
                     txt_price = "20",
                     iv_cityID = R.drawable.ic_location,
 
@@ -75,10 +74,12 @@ class WorkerFragment : Fragment() {
                 )
 
             }
-            Log.d("tag2", "${dataWorkers}")
+            Log.d("tag3", "Hello + ${dataWorkers}")
             rv_worker.adapter = WorkerAdapter(dataWorkers)
-
         }
+
+
+
 
 
 

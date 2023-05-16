@@ -37,7 +37,6 @@ class WorkerAdapter(private val images: List<DataWorker>) :
         val iv_city: ImageView = itemView.findViewById(R.id.img_location)
         val txt_title: TextView = itemView.findViewById(R.id.txt_title_worker)
         val txt_type: TextView = itemView.findViewById(R.id.txt_type_worker)
-        val txt_type2: TextView = itemView.findViewById(R.id.txt_type_worker2)
         val txt_price: TextView = itemView.findViewById(R.id.txt_price_worker)
         val btn_apply: Button = itemView.findViewById(R.id.button)
 
