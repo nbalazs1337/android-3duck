@@ -4,6 +4,7 @@ import androidx.room.Room
 
 import com.balazs.project.persistence.dao.WorkerDao
 import com.balazs.project.persistence.localApi.WorkerApi
+import com.balazs.project.presentation.AppDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

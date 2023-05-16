@@ -46,14 +46,6 @@ class WorkerFragment : Fragment() {
         (requireActivity().application as MyApplication).appComponent.inject(this)
         // Fetch worker data using the WorkerApi
 
-        val workers = workerViewModel.loadWorkers()
-        workerViewModel.workersLiveData.observe(viewLifecycleOwner) { workers ->
-            // Update UI with worker data
-            Log.d("tag2", "${workers}")
-        }
-
-
-
         rv_worker = view.findViewById(R.id.rv_worker_recom)
         rv_worker.setHasFixedSize(true)
         rv_worker.setLayoutManager(
@@ -63,23 +55,32 @@ class WorkerFragment : Fragment() {
                 false
             )
         )
+        workerViewModel.workersLiveData.observe(viewLifecycleOwner) { workers ->
+            // Update UI with worker data
+            Log.d("tag2", "${workers}")
+            val dataWorkers = workers.map { worker ->
+                DataWorker(
+                    // Map the properties from WorkerDB to DataWorker
+                    // Modify the property assignments based on your WorkerDB class structure
+                    iv_coverID = R.drawable.hammer,
+                    txt_title = worker.name,
+                    txt_city = worker.city,
+                    txt_type = worker.type,
+                    txt_type2 = worker.type,
+                    txt_price = "20",
+                    iv_cityID = R.drawable.ic_location,
 
 
-        val imageList = MutableList(5) { i ->
-            DataWorker(
-                R.drawable.hammer,
-                "",
-                "",
-                "",
-                "",
-                "",
-                R.drawable.ic_city,
-                R.drawable.ic_star
-            )
+                    // Assign other properties as needed
+                )
+
+            }
+            Log.d("tag2", "${dataWorkers}")
+            rv_worker.adapter = WorkerAdapter(dataWorkers)
 
         }
 
-        rv_worker.adapter = WorkerAdapter(imageList)
+
 
 
     }

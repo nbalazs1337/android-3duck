@@ -1,14 +1,11 @@
 package com.balazs.project.presentation;
 
 //import com.balazs.project.TestActivity
-import AppComponent
-import AppDatabase
 import AppModule
 import android.R
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 
 import android.widget.ImageButton
@@ -22,8 +19,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.room.Room
-import com.balazs.project.MyApplication
-import com.balazs.project.persistence.AppDatabase
 import com.balazs.project.persistence.localApi.WorkerApi
 import com.balazs.project.persistence.model.WorkerDB
 import com.balazs.project.utils.TransparentStatusBarHandler
@@ -64,7 +59,7 @@ class HomeActivity : AppCompatActivity() {
         appComponent.inject(this)
         //val workers = workerApi.getAllWorkers()
         // Create a new worker
-       /* val worker = WorkerDB(
+        /*val worker = WorkerDB(
             name = "Bathroom Tap Changer",
             city = "Cluj-Napoca",
             type = "contract",
@@ -215,10 +210,7 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun dpToPx(dp: Int): Int {
-        val density = resources.displayMetrics.density
-        return (dp.toFloat() * density + 0.5f).toInt()
-    }
+
 
     private fun addWorker(worker: WorkerDB) {
         // Invoke the addWorker method of WorkerApi to add the worker

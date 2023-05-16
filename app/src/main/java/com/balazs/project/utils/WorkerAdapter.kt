@@ -20,12 +20,13 @@ class WorkerAdapter(private val images: List<DataWorker>) :
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
 
-        holder.iv_photo.setImageResource(R.drawable.hammer)
-        holder.txt_title.text = "Bathroom Tap Changer"
-        holder.txt_type.text = "contract"
-        holder.txt_type2.text = "contract2"
-        holder.txt_price.text = "50$"
-        holder.iv_city.setImageResource(R.drawable.ic_location)
+        val dataWorker = images[position]
+
+        holder.iv_photo.setImageResource(dataWorker.iv_coverID)
+        holder.txt_title.text = dataWorker.txt_title
+        holder.txt_type.text = dataWorker.txt_type
+        holder.txt_price.text = dataWorker.txt_price
+        holder.iv_city.setImageResource(dataWorker.iv_cityID)
         holder.btn_apply.text = "apply"
     }
     override fun getItemCount(): Int {
