@@ -28,8 +28,8 @@ class WorkerFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
 
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,7 +57,6 @@ class WorkerFragment : Fragment() {
         )
         workerViewModel.workersLiveData.observe(viewLifecycleOwner) { workers ->
             // Update UI with worker data
-            Log.d("yoyo", "${workers}")
             val dataWorkers = workers.map { worker ->
                 DataWorker(
                     // Map the properties from WorkerDB to DataWorker
@@ -78,7 +77,8 @@ class WorkerFragment : Fragment() {
             rv_worker.adapter = WorkerAdapter(dataWorkers)
         }
 
-
+        // Load workers from the database
+        workerViewModel.loadWorkers()
 
 
 
