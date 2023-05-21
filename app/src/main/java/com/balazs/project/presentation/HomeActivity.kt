@@ -78,12 +78,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        /*val test_text :TextView = findViewById(com.balazs.project.R.id.txt_name)
-        test_text.setOnClickListener {
-            val intent = Intent(this, TestActivity::class.java)
-            startActivity(intent)
 
-        }*/
 
 
         val email = intent.getStringExtra("email")
