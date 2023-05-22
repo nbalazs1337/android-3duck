@@ -40,7 +40,5 @@ class WorkerAdapter(private val images: List<DataWorker>) :
         val txt_price: TextView = itemView.findViewById(R.id.txt_price_worker)
         val btn_apply: Button = itemView.findViewById(R.id.button)
 
-
-
     }
 }

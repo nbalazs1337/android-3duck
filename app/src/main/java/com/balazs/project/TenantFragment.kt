@@ -1,7 +1,6 @@
 package com.balazs.project
 
 import Adapter
-import Photo
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.balazs.project.data.model.api.PropertyResponse
 import com.balazs.project.data.model.rv.DataTenant
 import com.balazs.project.data.model.rv.DataTenant2
 import com.balazs.project.networking.RetrofitClient
@@ -22,6 +22,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
+import org.json.JSONObject
+import java.io.File
 import java.lang.reflect.Type
 
 
@@ -58,44 +60,6 @@ class TenantFragment : Fragment() {
         )
 
 
-        newestRecyclerView = view.findViewById(R.id.rv_newest)
-        newestRecyclerView.setHasFixedSize(true)
-        newestRecyclerView.setLayoutManager(
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.VERTICAL,
-                false
-            )
-        )
-
-        val imageList = MutableList(5) { i ->
-            DataTenant(
-                R.drawable.mock,
-                "",
-                "",
-                "",
-                R.drawable.ic_city,
-                R.drawable.ic_star
-            )
-
-        }
-
-        val imageList2 = MutableList(5) { i ->
-            DataTenant2(
-                R.drawable.tenant,
-                "",
-                "",
-                "",
-                "",
-                R.drawable.ic_location
-
-            )
-
-        }
-
-
-       // newestRecyclerView.adapter = SecondAdapter(imageList2)
-       // recomendedRecyclerView.adapter = Adapter(imageList)
         fetchDataFromAPI()
 
 
@@ -111,15 +75,21 @@ class TenantFragment : Fragment() {
                     val responseBody = response.body()
                     Log.d("api", "API response successful: $responseBody")
                     val responseBodyString = responseBody?.string() // Convert the response body to a string
+                    if (!responseBodyString.isNullOrEmpty()) {
                     Log.d("api", "API response successful: $responseBodyString")
                     // Process the responseBody as needed
                     val propertyListings = parseResponseData(responseBodyString)
+
                     Log.d("api", "Property Listing: $responseBodyString")// Implement this method to parse the response
                     // Update the RecyclerView adapters with the fetched data
                     val recomendedAdapter = Adapter(propertyListings)
                     //val newestAdapter = SecondAdapter(propertyListings)
                     recomendedRecyclerView.adapter = recomendedAdapter
-                    recomendedAdapter.notifyDataSetChanged()
+                   recomendedAdapter.notifyDataSetChanged()}
+                    else {
+                        // Handle the case where the response body is null or empty
+                        Log.d("recycler", "There is no data")
+                    }
                //     newestRecyclerView.adapter = newestAdapter
                 } else {
                     // Handle API error
@@ -131,17 +101,25 @@ class TenantFragment : Fragment() {
             }
         }
     }
-    private fun parseResponseData(responseBodyString: String?): List<Photo> {
+    private fun parseResponseData(responseBodyString: String?): List<PropertyResponse> {
         if (responseBodyString.isNullOrEmpty()) {
             // Handle the case where the response body is null or empty
             return emptyList()
         }
+
         val gson = Gson()
+        val jsonObject = JSONObject(responseBodyString)
+        val dataObject = jsonObject.optJSONObject("data")
+        val homeSearchObject = dataObject?.optJSONObject("home_search")
+        val dataArray = homeSearchObject?.optJSONArray("data")
 
-        val type: Type = object : TypeToken<List<Photo>>() {}.type
-        val propertyListings: List<Photo> = gson.fromJson(responseBodyString, type)
+        if (dataArray != null && dataArray.length() > 0) {
+            val type: Type = object : TypeToken<List<PropertyResponse>>() {}.type
+            val propertyListings: List<PropertyResponse> = gson.fromJson(dataArray.toString(), type)
+            return propertyListings
+        }
 
-        return propertyListings
+        return emptyList()
     }
 }
 

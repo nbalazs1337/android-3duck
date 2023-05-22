@@ -1,4 +1,5 @@
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,11 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
 import com.balazs.project.data.model.api.PropertyItem
+import com.balazs.project.data.model.api.PropertyResponse
 import com.balazs.project.data.model.rv.DataTenant
 import com.balazs.project.presentation.RentDetailActivity
 import com.bumptech.glide.Glide
 
-class Adapter(private val propertyListings: List<Photo>) :
+class Adapter(private val propertyListings: List<PropertyResponse>) :
     RecyclerView.Adapter<Adapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -20,18 +22,16 @@ class Adapter(private val propertyListings: List<Photo>) :
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val photo = propertyListings[position]
+        val item = propertyListings[position]
 
-        //holder.iv_photo.setImageResource(R.drawable.mock)
-        //holder.txt_title.text = "Garsoniera Manastur"
-       // holder.txt_city.text = "Cluj-Napoca"
-        //holder.txt_rating.text = "4.3"
-        holder.txt_title.text = photo.title
-        holder.txt_city.text = photo.description
-
+        holder.txt_rating.text = "4.3"
+        holder.txt_title.text = item.data.home_search.results[position].photos[position].title.toString()
+        holder.txt_city.text = item.data.home_search.results[position].photos[position].description.toString()
+        Log.d("recycler", "${holder.txt_city.text}")
+        Log.d("recycler", "${holder.txt_title.text}")
         // Load the photo using a library like Glide or Picasso
         Glide.with(holder.itemView.context)
-            .load(photo.href)
+            .load(item.data.home_search.results[position].photos[position].href)
             .into(holder.iv_photo)
         holder.iv_city.setImageResource(R.drawable.ic_city)
         holder.iv_star.setImageResource(R.drawable.ic_star)
@@ -55,7 +55,7 @@ class Adapter(private val propertyListings: List<Photo>) :
         val iv_star: ImageView = itemView.findViewById(R.id.iv_star)
         val txt_title: TextView = itemView.findViewById(R.id.txt_title)
         val txt_city: TextView = itemView.findViewById(R.id.txt_city)
-       // val txt_rating: TextView = itemView.findViewById(R.id.txt_rating)
+        val txt_rating: TextView = itemView.findViewById(R.id.txt_rating)
 
     }
 }
