@@ -63,8 +63,8 @@ class TenantFragment : Fragment() {
         fetchDataFromAPI()
 
 
-
     }
+
     private fun fetchDataFromAPI() {
         val retrofitService = RetrofitClient.realEstateApiService
 
@@ -74,23 +74,40 @@ class TenantFragment : Fragment() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     Log.d("api", "API response successful: $responseBody")
-                    val responseBodyString = responseBody?.string() // Convert the response body to a string
+                    val responseBodyString =
+                        responseBody?.string() // Convert the response body to a string
                     if (!responseBodyString.isNullOrEmpty()) {
-                    Log.d("api", "API response successful: $responseBodyString")
-                    // Process the responseBody as needed
-                    val propertyListings = parseResponseData(responseBodyString)
+                        Log.d("api", "API response successful: $responseBodyString")
+                        // Process the responseBody as needed
+                        val propertyListings = parseResponseData(responseBodyString)
 
-                    Log.d("api", "Property Listing: $responseBodyString")// Implement this method to parse the response
-                    // Update the RecyclerView adapters with the fetched data
-                    val recomendedAdapter = Adapter(propertyListings)
-                    //val newestAdapter = SecondAdapter(propertyListings)
-                    recomendedRecyclerView.adapter = recomendedAdapter
-                   recomendedAdapter.notifyDataSetChanged()}
-                    else {
+                        Log.d(
+                            "api",
+                            "Property Listing: $responseBodyString"
+                        )// Implement this method to parse the response
+                        // Update the RecyclerView adapters with the fetched data
+
+                        val recomendedAdapter = Adapter(propertyListings)
+
+                            // Set the adapter to the RecyclerView
+                            recomendedRecyclerView.adapter = recomendedAdapter
+                            Log.d("Adapter", "${recomendedAdapter.itemCount}")
+                        Log.d("Adapter", "Data size: ${propertyListings.size}")
+
+                        for (item in propertyListings) {
+                            Log.d("Adapter", "Item: $item")
+                        }
+
+
+
+                        //val newestAdapter = SecondAdapter(propertyListings)
+
+                        recomendedAdapter.notifyDataSetChanged()
+                    } else {
                         // Handle the case where the response body is null or empty
                         Log.d("recycler", "There is no data")
                     }
-               //     newestRecyclerView.adapter = newestAdapter
+                    //     newestRecyclerView.adapter = newestAdapter
                 } else {
                     // Handle API error
                     Log.e("api", "API request failed with code: ${response.code()}")
@@ -101,6 +118,7 @@ class TenantFragment : Fragment() {
             }
         }
     }
+
     private fun parseResponseData(responseBodyString: String?): List<PropertyResponse> {
         if (responseBodyString.isNullOrEmpty()) {
             // Handle the case where the response body is null or empty

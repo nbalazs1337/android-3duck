@@ -25,10 +25,10 @@ class Adapter(private val propertyListings: List<PropertyResponse>) :
         val item = propertyListings[position]
 
         holder.txt_rating.text = "4.3"
-        holder.txt_title.text = item.data.home_search.results[position].photos[position].title.toString()
-        holder.txt_city.text = item.data.home_search.results[position].photos[position].description.toString()
-        Log.d("recycler", "${holder.txt_city.text}")
-        Log.d("recycler", "${holder.txt_title.text}")
+        holder.txt_title.text = item.data.home_search.results[position].location.address.state
+        holder.txt_city.text = item.data.home_search.results[position].location.address.city
+        Log.d("recycler", "${holder.txt_city.text.toString()}")
+        Log.d("recycler", "${holder.txt_title.text.toString()}")
         // Load the photo using a library like Glide or Picasso
         Glide.with(holder.itemView.context)
             .load(item.data.home_search.results[position].photos[position].href)
