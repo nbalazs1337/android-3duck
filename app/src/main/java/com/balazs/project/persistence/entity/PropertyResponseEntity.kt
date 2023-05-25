@@ -1,3 +1,4 @@
+/*
 package com.balazs.project.persistence.entity
 
 import androidx.room.Entity
@@ -9,3 +10,4 @@ data class PropertyResponseEntity(
     // Include other fields you want to cache from PropertyResponse
 )
 
+*/

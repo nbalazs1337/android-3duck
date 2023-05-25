@@ -2,7 +2,7 @@ package com.balazs.project.data.model.api
 
 data class Result(
     val advertisers: List<Advertiser>,
-    val branding: List<Branding>,
+    val branding: Any,
     val community: Any,
     val description: Description,
     val flags: Flags,

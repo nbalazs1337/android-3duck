@@ -8,7 +8,7 @@ data class Description(
     val baths_full_calc: Any,
     val baths_half: Any,
     val baths_max: Double,
-    val baths_min: Int,
+    val baths_min: Double,
     val baths_partial_calc: Any,
     val beds: Any,
     val beds_max: Int,

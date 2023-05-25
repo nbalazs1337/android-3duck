@@ -7,9 +7,9 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.balazs.project.persistence.dao.WorkerDao
-import com.balazs.project.persistence.model.WorkerDB
+import com.balazs.project.persistence.entity.WorkerEntity
 
-@Database(entities = [WorkerDB::class], version = 2)
+@Database(entities = [WorkerEntity::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun workerDao(): WorkerDao
 

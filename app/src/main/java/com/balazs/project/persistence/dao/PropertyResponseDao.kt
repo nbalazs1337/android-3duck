@@ -1,3 +1,4 @@
+/*
 package com.balazs.project.persistence.dao
 
 import androidx.room.Dao
@@ -16,3 +17,4 @@ interface PropertyResponseDao {
     @Query("SELECT * FROM property_response")
     suspend fun getAllPropertyResponses(): List<PropertyResponseEntity>
 }
+*/

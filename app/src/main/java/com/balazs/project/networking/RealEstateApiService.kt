@@ -1,3 +1,4 @@
+import com.balazs.project.data.model.api.PropertyResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.GET
@@ -9,5 +10,5 @@ interface RealEstateApiService {
         @Query("city") city: String,
         @Query("state_code") stateCode: String,
         // Add other query parameters as needed
-    ): Response<ResponseBody>
+    ): Response<PropertyResponse>
 }

@@ -1,6 +1,7 @@
 package com.balazs.project.presentation;
 
 //import com.balazs.project.TestActivity
+
 import AppModule
 import android.R
 import android.content.Intent
@@ -19,8 +20,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.room.Room
+import com.balazs.project.persistence.entity.WorkerEntity
 import com.balazs.project.persistence.localApi.WorkerApi
-import com.balazs.project.persistence.model.WorkerDB
 import com.balazs.project.utils.TransparentStatusBarHandler
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -207,7 +208,7 @@ class HomeActivity : AppCompatActivity() {
 
 
 
-    private fun addWorker(worker: WorkerDB) {
+    private fun addWorker(worker: WorkerEntity) {
         // Invoke the addWorker method of WorkerApi to add the worker
         lifecycleScope.launch {
             workerApi.addWorker(worker)

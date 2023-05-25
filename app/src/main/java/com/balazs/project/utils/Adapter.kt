@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
 import com.balazs.project.data.model.api.PropertyItem
 import com.balazs.project.data.model.api.PropertyResponse
+import com.balazs.project.data.model.api.Result
 import com.balazs.project.data.model.rv.DataTenant
 import com.balazs.project.presentation.RentDetailActivity
 import com.bumptech.glide.Glide
 
-class Adapter(private val propertyListings: List<PropertyResponse>) :
+class Adapter(private val propertyListings: List<Result>) :
     RecyclerView.Adapter<Adapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -25,23 +26,25 @@ class Adapter(private val propertyListings: List<PropertyResponse>) :
         val item = propertyListings[position]
 
         holder.txt_rating.text = "4.3"
-        holder.txt_title.text = item.data.home_search.results[position].location.address.state
-        holder.txt_city.text = item.data.home_search.results[position].location.address.city
+        holder.txt_title.text = item.location.address.postal_code
+        holder.txt_city.text = item.location.address.city
         Log.d("recycler", "${holder.txt_city.text.toString()}")
         Log.d("recycler", "${holder.txt_title.text.toString()}")
         // Load the photo using a library like Glide or Picasso
-        Glide.with(holder.itemView.context)
+       /* Glide.with(holder.itemView.context)
             .load(item.data.home_search.results[position].photos[position].href)
-            .into(holder.iv_photo)
+            .into(holder.iv_photo)*/
+
+        holder.iv_photo.setImageResource(R.drawable.mock)
         holder.iv_city.setImageResource(R.drawable.ic_city)
         holder.iv_star.setImageResource(R.drawable.ic_star)
 
 
-        holder.itemView.setOnClickListener {
+      /*  holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, RentDetailActivity::class.java)
             //intent.putExtra("item_id", currentItem.id) // pass any data to the next activity
             holder.itemView.context.startActivity(intent)
-        }
+        }*/
 
     }
 

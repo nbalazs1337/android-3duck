@@ -10,6 +10,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.balazs.project.data.model.api.Data
+import com.balazs.project.data.model.api.HomeSearch
+import com.balazs.project.data.model.api.Location
 import com.balazs.project.data.model.api.PropertyResponse
 import com.balazs.project.data.model.rv.DataTenant
 import com.balazs.project.data.model.rv.DataTenant2
@@ -64,7 +67,6 @@ class TenantFragment : Fragment() {
 
 
     }
-
     private fun fetchDataFromAPI() {
         val retrofitService = RetrofitClient.realEstateApiService
 
@@ -74,40 +76,18 @@ class TenantFragment : Fragment() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     Log.d("api", "API response successful: $responseBody")
-                    val responseBodyString =
-                        responseBody?.string() // Convert the response body to a string
-                    if (!responseBodyString.isNullOrEmpty()) {
-                        Log.d("api", "API response successful: $responseBodyString")
-                        // Process the responseBody as needed
-                        val propertyListings = parseResponseData(responseBodyString)
-
-                        Log.d(
-                            "api",
-                            "Property Listing: $responseBodyString"
-                        )// Implement this method to parse the response
-                        // Update the RecyclerView adapters with the fetched data
-
+                    val propertyListings = responseBody?.data?.home_search?.results ?: emptyList()
+                    Log.d("api", "API response successful: $propertyListings")
+                    if (propertyListings.isNotEmpty()) {
                         val recomendedAdapter = Adapter(propertyListings)
-
-                            // Set the adapter to the RecyclerView
-                            recomendedRecyclerView.adapter = recomendedAdapter
-                            Log.d("Adapter", "${recomendedAdapter.itemCount}")
+                        // Set the adapter to the RecyclerView
+                        recomendedRecyclerView.adapter = recomendedAdapter
+                        Log.d("Adapter", "${recomendedAdapter.itemCount}")
                         Log.d("Adapter", "Data size: ${propertyListings.size}")
-
-                        for (item in propertyListings) {
-                            Log.d("Adapter", "Item: $item")
-                        }
-
-
-
-                        //val newestAdapter = SecondAdapter(propertyListings)
-
-                        recomendedAdapter.notifyDataSetChanged()
                     } else {
-                        // Handle the case where the response body is null or empty
+                        // Handle the case where the response body is empty
                         Log.d("recycler", "There is no data")
                     }
-                    //     newestRecyclerView.adapter = newestAdapter
                 } else {
                     // Handle API error
                     Log.e("api", "API request failed with code: ${response.code()}")
@@ -119,26 +99,11 @@ class TenantFragment : Fragment() {
         }
     }
 
-    private fun parseResponseData(responseBodyString: String?): List<PropertyResponse> {
-        if (responseBodyString.isNullOrEmpty()) {
-            // Handle the case where the response body is null or empty
-            return emptyList()
-        }
 
-        val gson = Gson()
-        val jsonObject = JSONObject(responseBodyString)
-        val dataObject = jsonObject.optJSONObject("data")
-        val homeSearchObject = dataObject?.optJSONObject("home_search")
-        val dataArray = homeSearchObject?.optJSONArray("data")
 
-        if (dataArray != null && dataArray.length() > 0) {
-            val type: Type = object : TypeToken<List<PropertyResponse>>() {}.type
-            val propertyListings: List<PropertyResponse> = gson.fromJson(dataArray.toString(), type)
-            return propertyListings
-        }
 
-        return emptyList()
-    }
+
+
 }
 
 
