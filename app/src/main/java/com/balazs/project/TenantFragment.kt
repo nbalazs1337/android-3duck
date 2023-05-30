@@ -3,31 +3,19 @@ package com.balazs.project
 import Adapter
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.balazs.project.data.model.api.Data
-import com.balazs.project.data.model.api.HomeSearch
-import com.balazs.project.data.model.api.Location
-import com.balazs.project.data.model.api.PropertyResponse
-import com.balazs.project.data.model.rv.DataTenant
-import com.balazs.project.data.model.rv.DataTenant2
+import com.balazs.project.data.model.rv.RentListing
 import com.balazs.project.networking.RetrofitClient
-import com.balazs.project.utils.SecondAdapter
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.balazs.project.presentation.AddRentFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.ResponseBody
-import org.json.JSONObject
-import java.io.File
-import java.lang.reflect.Type
 
 
 class TenantFragment : Fragment() {
@@ -61,12 +49,26 @@ class TenantFragment : Fragment() {
                 false
             )
         )
+        newestRecyclerView = view.findViewById(R.id.rv_new)
+        newestRecyclerView.setHasFixedSize(true)
+        newestRecyclerView.setLayoutManager(
+            LinearLayoutManager(
+                context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        )
 
 
-        fetchDataFromAPI()
+        //fetchDataFromAPI()
+        val btn_add = view.findViewById<Button>(R.id.btn_add)
+        btn_add.setOnClickListener {
+            openAddDataScreen()
+        }
 
 
     }
+
     private fun fetchDataFromAPI() {
         val retrofitService = RetrofitClient.realEstateApiService
 
@@ -99,9 +101,21 @@ class TenantFragment : Fragment() {
         }
     }
 
+    private fun populateNewRecyclerView() {
 
+    }
 
+    private fun openAddDataScreen() {
+        // Create an instance of the dialog fragment
+        val addRentFragment = AddRentFragment()
+        addRentFragment.show(childFragmentManager, "AddRentFragment")
+    }
 
+    fun addRentListing(rentListing: RentListing) {
+
+        rentListings.add(rentListing)
+        adapter.notifyDataSetChanged()
+    }
 
 
 }

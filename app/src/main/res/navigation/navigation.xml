@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_notificationFragment"
             app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addRentFragment"
+            app:destination="@id/addRentFragment" />
     </fragment>
     <fragment
         android:id="@+id/landlordFragment"
@@ -35,4 +38,9 @@
         android:name="com.balazs.project.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/addRentFragment"
+        android:name="com.balazs.project.AddRentFragment"
+        android:label="fragment_add_rent"
+        tools:layout="@layout/fragment_add_rent" />
 </navigation>
