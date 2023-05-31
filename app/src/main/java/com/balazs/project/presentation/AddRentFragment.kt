@@ -45,11 +45,19 @@ class AddRentFragment : DialogFragment() {
                 val floor = dialogView.findViewById<EditText>(R.id.et_floor).text.toString()
                 val description = dialogView.findViewById<EditText>(R.id.et_description).text.toString()
 
+
+
+                val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.putString("title", title)
+                editor.putString("cartier", cartier)
+                editor.putString("street", street)
+                editor.putString("number", number)
+                editor.putString("floor", floor)
+                editor.putString("description", description)
+                editor.apply()
                 val rentListing = RentListing(title,cartier,street, number,floor, description)
                 addRentListener?.onRentAdded(rentListing)
-                // Pass the rentListing object back to the TenantFragment
-               // val tenantFragment = parentFragment as? TenantFragment
-                //tenantFragment?.addRentListing(rentListing)
             }
             .setNegativeButton("Cancel", null)
 

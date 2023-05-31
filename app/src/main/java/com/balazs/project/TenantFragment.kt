@@ -2,6 +2,7 @@ package com.balazs.project
 
 import Adapter
 import RentListingAdapter
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,7 +26,7 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
     private lateinit var newestRecyclerView: RecyclerView
     private lateinit var adapter: RentListingAdapter
     private val rentListings: MutableList<RentListing> = mutableListOf()
-    
+
 
 
 
@@ -71,6 +72,16 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
         )
         newestRecyclerView.adapter = adapter
 
+        // Retrieve the saved data from shared preferences
+        val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val title = sharedPreferences.getString("title", "")?: ""
+        val cartier = sharedPreferences.getString("cartier", "")?: ""
+        val street = sharedPreferences.getString("street", "")?: ""
+        val number = sharedPreferences.getString("number", "")?: ""
+        val floor = sharedPreferences.getString("floor", "")?: ""
+        val description = sharedPreferences.getString("description", "")?: ""
+        val rentListing = RentListing(title, cartier, street, number, floor, description)
+        adapter.addRentListing(rentListing)
 
         //fetchDataFromAPI()
         val btn_add = view.findViewById<Button>(R.id.btn_add)
