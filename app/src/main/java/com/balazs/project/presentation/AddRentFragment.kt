@@ -5,21 +5,27 @@ import com.balazs.project.R
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
-import com.balazs.project.TenantFragment
 import com.balazs.project.data.model.rv.RentListing
-import com.balazs.project.presentation.HomeActivity
 
 
 class AddRentFragment : DialogFragment() {
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is AddRentListener) {
+            addRentListener = context
+        }
+    }
+    override fun onDetach() {
+        super.onDetach()
+        addRentListener = null
+    }
 
 
+    var addRentListener: AddRentListener? = null
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
 
@@ -40,15 +46,20 @@ class AddRentFragment : DialogFragment() {
                 val description = dialogView.findViewById<EditText>(R.id.et_description).text.toString()
 
                 val rentListing = RentListing(title,cartier,street, number,floor, description)
-
+                addRentListener?.onRentAdded(rentListing)
                 // Pass the rentListing object back to the TenantFragment
-                val tenantFragment = parentFragment as? TenantFragment
-                tenantFragment?.addRentListing(rentListing)
+               // val tenantFragment = parentFragment as? TenantFragment
+                //tenantFragment?.addRentListing(rentListing)
             }
             .setNegativeButton("Cancel", null)
 
         return builder.create()
     }
 
+    interface AddRentListener {
+        fun onRentAdded(rentListing: RentListing)
+
+
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.balazs.project
 
 import Adapter
+import RentListingAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.data.model.rv.RentListing
@@ -18,9 +20,13 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class TenantFragment : Fragment() {
+class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
     private lateinit var recomendedRecyclerView: RecyclerView
     private lateinit var newestRecyclerView: RecyclerView
+    private lateinit var adapter: RentListingAdapter
+    private val rentListings: MutableList<RentListing> = mutableListOf()
+    
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,11 +40,16 @@ class TenantFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tenant, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+        adapter = RentListingAdapter()
+         // val recomendedAdapter = Adapter(propertyListings)
+        // Set the adapter to the RecyclerView
+        // recomendedRecyclerView.adapter = recomendedAdapter
 
         recomendedRecyclerView = view.findViewById(R.id.rv_recomended)
         recomendedRecyclerView.setHasFixedSize(true)
@@ -58,6 +69,7 @@ class TenantFragment : Fragment() {
                 false
             )
         )
+        newestRecyclerView.adapter = adapter
 
 
         //fetchDataFromAPI()
@@ -101,22 +113,23 @@ class TenantFragment : Fragment() {
         }
     }
 
-    private fun populateNewRecyclerView() {
 
-    }
 
     private fun openAddDataScreen() {
         // Create an instance of the dialog fragment
-        val addRentFragment = AddRentFragment()
-        addRentFragment.show(childFragmentManager, "AddRentFragment")
+        val addRentFragment = AddRentFragment().apply {
+            addRentListener = this@TenantFragment
+        }
+        addRentFragment.show(parentFragmentManager, "AddRentFragment")
+
     }
 
-    fun addRentListing(rentListing: RentListing) {
 
-        rentListings.add(rentListing)
+    override fun onRentAdded(rentListing: RentListing) {
+        // Add the rentListing to your RecyclerView adapter here
+        adapter.addRentListing(rentListing)
         adapter.notifyDataSetChanged()
     }
-
 
 }
 

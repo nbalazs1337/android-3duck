@@ -15,8 +15,8 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
         // For example:
          val title: TextView = itemView.findViewById(R.id.txt_title)
          val city: TextView = itemView.findViewById(R.id.txt_city)
-         val rooms: TextView = itemView.findViewById(R.id.txt_rating)
-         val titleTextView: TextView = itemView.findViewById(R.id.txt_title)
+         val rooms: TextView = itemView.findViewById(R.id.txt_rooms)
+
 
     }
 
@@ -31,7 +31,9 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
 
         // Bind the data to the views within the ViewHolder
         // For example:
-         holder.titleTextView.text = rentListing.title
+         holder.title.text = rentListing.title
+         holder.city.text = rentListing.neighborhood
+        holder.rooms.text = rentListing.floor
     }
 
     override fun getItemCount(): Int {
