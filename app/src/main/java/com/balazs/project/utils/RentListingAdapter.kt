@@ -1,3 +1,4 @@
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -5,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
 import com.balazs.project.data.model.rv.RentListing
+import com.balazs.project.presentation.RentDetailActivity
 
 class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingViewHolder>() {
 
@@ -34,6 +36,13 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
          holder.title.text = rentListing.title
          holder.city.text = rentListing.neighborhood
         holder.rooms.text = rentListing.floor
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, RentDetailActivity::class.java)
+            intent.putExtra("title", holder.title.text) // pass any data to the next activity
+           // intent.putExtra("city", holder.title.text) // pass any data to the next activity
+            //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

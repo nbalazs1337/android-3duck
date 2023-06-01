@@ -1,5 +1,6 @@
 package com.balazs.project.utils
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
 import com.balazs.project.data.model.rv.DataTenant2
+import com.balazs.project.presentation.RentDetailActivity
 
 class SecondAdapter(private val images: List<DataTenant2>) :
     RecyclerView.Adapter<SecondAdapter.ImageViewHolder>()  {
