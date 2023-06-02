@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.data.model.rv.RentListing
 import com.balazs.project.networking.RetrofitClient
 import com.balazs.project.presentation.AddRentFragment
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,6 +29,7 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
     private lateinit var newestRecyclerView: RecyclerView
     private lateinit var adapter: RentListingAdapter
     private val rentListings: MutableList<RentListing> = mutableListOf()
+    private lateinit var searchView: SearchView
 
 
 
@@ -44,13 +48,32 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
 
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
         adapter = RentListingAdapter()
+        // Find the SearchView from the layout
+        searchView = view.findViewById(R.id.search_view)
          // val recomendedAdapter = Adapter(propertyListings)
         // Set the adapter to the RecyclerView
         // recomendedRecyclerView.adapter = recomendedAdapter
+        // Set the OnQueryTextListener for search events
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // Perform the search action when the user submits the query
+                performSearch(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // Perform filtering as the user types in the search query
+                performSearch(newText)
+
+                return true
+            }
+        })
+
 
         recomendedRecyclerView = view.findViewById(R.id.rv_recomended)
         recomendedRecyclerView.setHasFixedSize(true)
@@ -72,16 +95,7 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
         )
         newestRecyclerView.adapter = adapter
 
-        // Retrieve the saved data from shared preferences
-        val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val title = sharedPreferences.getString("title", "")?: ""
-        val cartier = sharedPreferences.getString("cartier", "")?: ""
-        val street = sharedPreferences.getString("street", "")?: ""
-        val number = sharedPreferences.getString("number", "")?: ""
-        val floor = sharedPreferences.getString("floor", "")?: ""
-        val description = sharedPreferences.getString("description", "")?: ""
-        val rentListing = RentListing(title, cartier, street, number, floor, description)
-        adapter.addRentListing(rentListing)
+        loadRentListingsFromSharedPreferences()
 
         //fetchDataFromAPI()
         val btn_add = view.findViewById<Button>(R.id.btn_add)
@@ -90,6 +104,10 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
         }
 
 
+    }
+    override fun onPause() {
+        super.onPause()
+        adapter.saveRentListingsToSharedPreferences(requireContext())
     }
 
     private fun fetchDataFromAPI() {
@@ -141,6 +159,22 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
         adapter.addRentListing(rentListing)
         adapter.notifyDataSetChanged()
     }
+
+    private fun performSearch(query: String) {
+        val adapter = newestRecyclerView.adapter as? RentListingAdapter
+        adapter?.filter(query)
+    }
+    private fun loadRentListingsFromSharedPreferences() {
+        val sharedPreferences = requireContext().getSharedPreferences("MyPrefs2", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("rentListings", null)
+        val type = object : TypeToken<List<RentListing>>() {}.type
+        val rentListings = gson.fromJson<List<RentListing>>(json, type) ?: emptyList()
+
+        adapter.setRentListings(rentListings)
+    }
+
+
 
 }
 

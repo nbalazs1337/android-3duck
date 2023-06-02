@@ -1,16 +1,22 @@
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
 import com.balazs.project.data.model.rv.RentListing
 import com.balazs.project.presentation.RentDetailActivity
+import com.google.gson.Gson
+import java.util.Locale
 
 class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingViewHolder>() {
 
     private val rentListings: MutableList<RentListing> = mutableListOf()
+    private val filteredRentListings: MutableList<RentListing> = mutableListOf()
 
     inner class RentListingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Define and initialize views within the ViewHolder
@@ -29,7 +35,8 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
     }
 
     override fun onBindViewHolder(holder: RentListingViewHolder, position: Int) {
-        val rentListing = rentListings[position]
+        //val rentListing = rentListings[position]
+        val rentListing = filteredRentListings[position]
 
         // Bind the data to the views within the ViewHolder
         // For example:
@@ -46,11 +53,40 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
     }
 
     override fun getItemCount(): Int {
-        return rentListings.size
+        return filteredRentListings.size
     }
+
 
     fun addRentListing(rentListing: RentListing) {
         rentListings.add(rentListing)
+        filteredRentListings.add(rentListing)
         notifyDataSetChanged()
     }
+
+    fun filter(query: String) {
+        filteredRentListings.clear()
+        if (query.isNotEmpty()) {
+            val searchQuery = query.toLowerCase(Locale.getDefault())
+            filteredRentListings.addAll(rentListings.filter {
+                it.title.toLowerCase(Locale.getDefault()).contains(searchQuery)
+            })
+        } else {
+            filteredRentListings.addAll(rentListings)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun setRentListings(rentListings: List<RentListing>) {
+        this.rentListings.clear()
+        this.rentListings.addAll(rentListings)
+        filter("") // reapply the filter after setting the new list
+    }
+    fun saveRentListingsToSharedPreferences(context: Context) {
+        val sharedPreferences = context.getSharedPreferences("MyPrefs2", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = gson.toJson(rentListings)
+        sharedPreferences.edit().putString("rentListings", json).apply()
+    }
+
+
 }

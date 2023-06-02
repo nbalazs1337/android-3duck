@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.data.model.rv.DataLandlord
@@ -16,11 +17,14 @@ import com.balazs.project.presentation.AddLandlordFragment
 import com.balazs.project.presentation.AddRentFragment
 import com.balazs.project.utils.LandlordAdapter
 import com.balazs.project.utils.LandlordListingAdapter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
     private lateinit var rv_landlord: RecyclerView
     private lateinit var rv_landlord_new: RecyclerView
     private lateinit var adapter: LandlordListingAdapter
+    private lateinit var searchView: SearchView
     private val landlordListings: MutableList<LandlordListing> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +43,21 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
 
         super.onViewCreated(view, savedInstanceState)
         adapter = LandlordListingAdapter()
+        searchView = view.findViewById(R.id.search_view)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // Perform the search action when the user submits the query
+                performSearch(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // Perform filtering as the user types in the search query
+                performSearch(newText)
+
+                return true
+            }
+        })
         rv_landlord = view.findViewById(R.id.rv_landlord_recom)
         rv_landlord.setHasFixedSize(true)
         rv_landlord.setLayoutManager(
@@ -74,15 +93,9 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
             )
         )
         rv_landlord_new.adapter = adapter
-        val sharedPreferences = requireContext().getSharedPreferences("MyPrefsLandlord", Context.MODE_PRIVATE)
-        val name = sharedPreferences.getString("name", "")?: ""
-        val service = sharedPreferences.getString("service", "")?: ""
-        val price = sharedPreferences.getString("price", "")?: ""
-        val experience = sharedPreferences.getString("experience", "")?: ""
-        val description = sharedPreferences.getString("description", "")?: ""
 
-        val landlordListing = LandlordListing(name, service, price, experience, description)
-        adapter.addLandlordListing(landlordListing)
+       loadLandlordListingsFromSharedPreferences()
+
 
         val btn_add = view.findViewById<Button>(R.id.btn_add)
         btn_add.setOnClickListener {
@@ -90,6 +103,10 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
         }
 
 
+    }
+    override fun onPause() {
+        super.onPause()
+        adapter.saveRentListingsToSharedPreferences(requireContext())
     }
 
 
@@ -110,5 +127,20 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
         adapter.notifyDataSetChanged()
     }
 
-
+    private fun performSearch(query: String) {
+        val adapter = rv_landlord_new.adapter as? LandlordListingAdapter
+        adapter?.filter(query)
     }
+    private fun loadLandlordListingsFromSharedPreferences() {
+        val sharedPreferences = requireContext().getSharedPreferences("MyPrefs2Landlord", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("landlordListings", null)
+        val type = object : TypeToken<List<LandlordListing>>() {}.type
+        val landlordListings = gson.fromJson<List<LandlordListing>>(json, type) ?: emptyList()
+
+        adapter.setLandlordListings(landlordListings)
+    }
+
+
+
+}

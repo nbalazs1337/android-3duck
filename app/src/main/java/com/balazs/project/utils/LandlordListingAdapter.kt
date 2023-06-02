@@ -1,4 +1,5 @@
 package com.balazs.project.utils
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,13 @@ import com.balazs.project.data.model.rv.LandlordListing
 import com.balazs.project.data.model.rv.RentListing
 import com.balazs.project.presentation.LandlordDetailActivity
 import com.balazs.project.presentation.RentDetailActivity
+import com.google.gson.Gson
+import java.util.Locale
 
 class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.LandlordListingViewHolder>() {
 
     private val landlordListings: MutableList<LandlordListing> = mutableListOf()
+    private val filteredLandlordListings: MutableList<LandlordListing> = mutableListOf()
 
     inner class LandlordListingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Define and initialize views within the ViewHolder
@@ -49,11 +53,36 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
     }
 
     override fun getItemCount(): Int {
-        return landlordListings.size
+        return filteredLandlordListings.size
     }
 
     fun addLandlordListing(landlordListing: LandlordListing) {
         landlordListings.add(landlordListing)
+        filteredLandlordListings.add(landlordListing)
         notifyDataSetChanged()
+    }
+    fun filter(query: String) {
+        filteredLandlordListings.clear()
+        if (query.isNotEmpty()) {
+            val searchQuery = query.toLowerCase(Locale.getDefault())
+            filteredLandlordListings.addAll(landlordListings.filter {
+                it.service.toLowerCase(Locale.getDefault()).contains(searchQuery)
+            })
+        } else {
+            filteredLandlordListings.addAll(landlordListings)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun setLandlordListings(landlordListings: List<LandlordListing>) {
+        this.landlordListings.clear()
+        this.landlordListings.addAll(landlordListings)
+        filter("") // reapply the filter after setting the new list
+    }
+    fun saveRentListingsToSharedPreferences(context: Context) {
+        val sharedPreferences = context.getSharedPreferences("MyPrefs2Landlord", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = gson.toJson(landlordListings)
+        sharedPreferences.edit().putString("landlordListings", json).apply()
     }
 }
