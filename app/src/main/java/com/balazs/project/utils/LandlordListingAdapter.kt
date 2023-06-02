@@ -1,4 +1,5 @@
 package com.balazs.project.utils
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
 import com.balazs.project.data.model.rv.LandlordListing
 import com.balazs.project.data.model.rv.RentListing
+import com.balazs.project.presentation.LandlordDetailActivity
+import com.balazs.project.presentation.RentDetailActivity
 
 class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.LandlordListingViewHolder>() {
 
@@ -36,6 +39,13 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
         holder.title.text = landlordListing.service
         holder.name.text = landlordListing.name
         holder.price.text = landlordListing.price
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, LandlordDetailActivity::class.java)
+            intent.putExtra("title", holder.title.text) // pass any data to the next activity
+            // intent.putExtra("city", holder.title.text) // pass any data to the next activity
+            //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
