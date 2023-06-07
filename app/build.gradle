@@ -83,6 +83,7 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.38.1'
 
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
 
 
 

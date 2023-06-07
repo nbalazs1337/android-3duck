@@ -102,7 +102,7 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
         loadUsaListingsFromSharedPreferences()
 
 
-        //fetchDataFromAPI()
+        fetchDataFromAPI()
 
 
         val btn_add = view.findViewById<Button>(R.id.btn_add)
@@ -110,9 +110,9 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
             openAddDataScreen()
         }
 
-        /*val sharedPreferences = requireContext().getSharedPreferences("MyPrefs2USA", Context.MODE_PRIVATE)
+        val sharedPreferences = requireContext().getSharedPreferences("MyPrefs2USA", Context.MODE_PRIVATE)
         val usaListingsJson = sharedPreferences.getString("usaListings", null)
-        Log.d("SharedPreferences", "USA Listings: $usaListingsJson")*/
+        Log.d("SharedPreferences", "USA Listings: $usaListingsJson")
 
 
 
@@ -125,39 +125,46 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
     }
 
     private fun fetchDataFromAPI() {
-        val retrofitService = RetrofitClient.realEstateApiService
+        val sharedPreferences = requireContext().getSharedPreferences("MyPrefsUSA", Context.MODE_PRIVATE)
+        val savedListingsJson = sharedPreferences.getString("usa_listings", null)
 
-        GlobalScope.launch(Dispatchers.Main) {
-            try {
-                val response = retrofitService.getRentalPropertyListings("Detroit", "MI")
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                   // Log.d("api", "API response successful: $responseBody")
-                    val propertyListings = responseBody?.data?.home_search?.results ?: emptyList()
+        if (!savedListingsJson.isNullOrEmpty()) {
+            // Data is available in SharedPreferences, parse the JSON and use it
+            val savedListings: List<Result> = Gson().fromJson(savedListingsJson, object : TypeToken<List<Result>>() {}.type)
+            showData(savedListings)
+        } else {
+            // Data is not available in SharedPreferences, make the API request
+            val retrofitService = RetrofitClient.realEstateApiService
 
-                   // Log.d("api", "API response successful: $propertyListings")
+            GlobalScope.launch(Dispatchers.Main) {
+                try {
+                    val response = retrofitService.getRentalPropertyListings("Detroit", "MI")
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        val propertyListings = responseBody?.data?.home_search?.results ?: emptyList()
+                        showData(propertyListings)
 
-                    if (propertyListings.isNotEmpty()) {
-                        adapter_usa = Adapter(propertyListings)
-                        // Set the adapter to the RecyclerView
-                        recomendedRecyclerView.adapter = adapter_usa
-                        adapter_usa?.saveUsaListingsToSharedPreferences(requireContext())
-                        //Log.d("Adapter", "${recomendedAdapter.itemCount}")
-                       // Log.d("Adapter", "Data size: ${propertyListings.size}")
+                        // Save the fetched data to SharedPreferences
+                        val listingsJson = Gson().toJson(propertyListings)
+                        sharedPreferences.edit().putString("usa_listings", listingsJson).apply()
                     } else {
-                        // Handle the case where the response body is empty
-                       // Log.d("recycler", "There is no data")
+                        // Handle API error
+                        Log.e("api", "API request failed with code: ${response.code()}")
                     }
-                } else {
-                    // Handle API error
-                    Log.e("api", "API request failed with code: ${response.code()}")
+                } catch (e: Exception) {
+                    Log.e("api", "Error fetching data from API: ${e.message}")
+                    // Handle network or other exceptions
                 }
-            } catch (e: Exception) {
-                Log.e("api", "Error fetching data from API: ${e.message}")
-                // Handle network or other exceptions
             }
         }
     }
+
+    private fun showData(propertyListings: List<Result>) {
+        // Display the data on the UI or perform any other necessary operations
+        adapter_usa = Adapter(propertyListings)
+        recomendedRecyclerView.adapter = adapter_usa
+    }
+
 
 
 
@@ -198,7 +205,7 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
         val type = object : TypeToken<List<Result>>() {}.type
         val usaListings = gson.fromJson<List<Result>>(json, type) ?: emptyList()
 
-        adapter_usa?.setUsaListings(usaListings)
+       // adapter_usa?.setUsaListings(usaListings)
     }
 
 

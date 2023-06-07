@@ -1,5 +1,6 @@
 import android.content.Context
 import android.content.Intent
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,7 @@ import com.google.gson.Gson
 
 class Adapter(private val propertyListings: List<Result>) :
     RecyclerView.Adapter<Adapter.ImageViewHolder>() {
-    private val usaListings: MutableList<Result> = mutableListOf()
+    //private val usaListings: MutableList<Result> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.items, parent, false)
         return ImageViewHolder(view)
@@ -28,20 +29,34 @@ class Adapter(private val propertyListings: List<Result>) :
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val item = propertyListings[position]
+        Log.d("RecyclerView", "Item position: $position, Photo count: ${item.photos.size}")
 
-        holder.txt_rating.text = "4.3"
-        holder.txt_title.text = item.location.address.postal_code
+        holder.txt_rating.text = item.list_price_min.toString()
+        holder.txt_title.text = item.location.address.street_name
         holder.txt_city.text = item.location.address.city
         Log.d("recycler", "${holder.txt_city.text.toString()}")
         Log.d("recycler", "${holder.txt_title.text.toString()}")
-        // Load the photo using a library like Glide or Picasso
-       /* Glide.with(holder.itemView.context)
-            .load(item.data.home_search.results[position].photos[position].href)
-            .into(holder.iv_photo)*/
 
-        holder.iv_photo.setImageResource(R.drawable.profile)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, RentDetailActivity::class.java)
+            intent.putExtra("title", holder.txt_title.text) // pass any data to the next activity
+            intent.putExtra("city", holder.txt_city.text) // pass any data to the next activity
+            //intent.putExtra("price", holder.price.text) // pass any data to the next activity
+            //intent.putExtra("city", holder.title.text) // pass any data to the next activity
+            //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
+            holder.itemView.context.startActivity(intent)
+        }
+
+        val photoUrl = item.photos.getOrNull(0)?.href
+
+        // Load the photo using a library like Glide or Picasso
+       Glide.with(holder.itemView.context)
+            .load(photoUrl)
+            .into(holder.iv_photo)
+
+        //holder.iv_photo.setImageResource(R.drawable.profile)
         holder.iv_city.setImageResource(R.drawable.ic_city)
-        holder.iv_star.setImageResource(R.drawable.ic_star)
+        holder.iv_star.setImageResource(R.drawable.ic_money)
 
 
       /*  holder.itemView.setOnClickListener {
@@ -65,15 +80,28 @@ class Adapter(private val propertyListings: List<Result>) :
         val txt_rating: TextView = itemView.findViewById(R.id.txt_rating)
 
     }
+
+
     fun saveUsaListingsToSharedPreferences(context: Context) {
+        val sharedPreferences = context.getSharedPreferences("MyPrefsUSA", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        // Convert the list of listings to JSON string
+        val listingsJson = Gson().toJson(propertyListings)
+
+        // Save the JSON string in SharedPreferences
+        editor.putString("usa_listings", listingsJson)
+        editor.apply()
+    }
+    /*fun saveUsaListingsToSharedPreferences(context: Context) {
         val sharedPreferences = context.getSharedPreferences("MyPrefs2USA", Context.MODE_PRIVATE)
         val gson = Gson()
-        val json = gson.toJson(usaListings)
+        val json = gson.toJson(propertyListings)
         sharedPreferences.edit().putString("usaListings", json).apply()
-    }
-    fun setUsaListings(usaListings: List<Result>) {
-        this.usaListings.clear()
-        this.usaListings.addAll(usaListings)
+    }*/
+  /*  fun setUsaListings(usaListings: List<Result>) {
+        this.propertyListings.clear()
+        this.propertyListings.addAll(usaListings)
         //filter("") // reapply the filter after setting the new list
-    }
+    }*/
 }
