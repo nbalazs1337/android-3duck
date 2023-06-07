@@ -29,7 +29,7 @@
         android:background="@drawable/et_background"
         android:drawableLeft="@drawable/ic_favorite"
         android:drawablePadding="10dp"
-        android:hint="Title"
+        android:hint="City"
         android:paddingHorizontal="30dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -53,6 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_title"></EditText>
+
     <EditText
         android:id="@+id/et_street"
         android:layout_width="match_parent"
@@ -72,44 +73,26 @@
 
     <EditText
         android:id="@+id/et_number"
-        android:layout_width="165dp"
+        android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/et_background"
         android:drawableLeft="@drawable/ic_lock"
         android:drawablePadding="10dp"
-        android:hint="Number"
+        android:hint="Price"
         android:paddingHorizontal="30dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.015"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_street"></EditText>
 
-    <EditText
-        android:id="@+id/et_floor"
-        android:layout_width="165dp"
-        android:layout_height="49dp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/et_background"
-        android:drawableLeft="@drawable/ic_lock"
-        android:drawablePadding="10dp"
-        android:hint="Floor"
-        android:paddingHorizontal="30dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_street"></EditText>
 
     <EditText
         android:id="@+id/et_description"
-        android:layout_width="357dp"
-        android:layout_height="148dp"
+        android:layout_width="362dp"
+        android:layout_height="56dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/et_background"
@@ -122,8 +105,19 @@
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_floor"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/et_number"></EditText>
 
-
+    <Button
+        android:id="@+id/btn_add_rent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="100dp"
+        android:backgroundTint="@color/app_search"
+        android:text="Add photos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.303"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_description"></Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

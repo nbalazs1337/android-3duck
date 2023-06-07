@@ -8,9 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
 import com.balazs.project.data.model.rv.DataLandlord
+import com.balazs.project.data.model.rv.LandlordListing
 
 class LandlordAdapter(private val images: List<DataLandlord>) :
     RecyclerView.Adapter<LandlordAdapter.ImageViewHolder>()  {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.items_landlord, parent, false)

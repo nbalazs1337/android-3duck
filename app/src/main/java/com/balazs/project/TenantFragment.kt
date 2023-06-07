@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.balazs.project.data.model.api.Result
 import com.balazs.project.data.model.rv.RentListing
 import com.balazs.project.networking.RetrofitClient
 import com.balazs.project.presentation.AddRentFragment
@@ -28,6 +29,7 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
     private lateinit var recomendedRecyclerView: RecyclerView
     private lateinit var newestRecyclerView: RecyclerView
     private lateinit var adapter: RentListingAdapter
+    private  var adapter_usa: Adapter?=null
     private val rentListings: MutableList<RentListing> = mutableListOf()
     private lateinit var searchView: SearchView
 
@@ -94,20 +96,32 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
             )
         )
         newestRecyclerView.adapter = adapter
+        recomendedRecyclerView.adapter = adapter_usa
 
         loadRentListingsFromSharedPreferences()
+        loadUsaListingsFromSharedPreferences()
+
 
         //fetchDataFromAPI()
+
+
         val btn_add = view.findViewById<Button>(R.id.btn_add)
         btn_add.setOnClickListener {
             openAddDataScreen()
         }
+
+        /*val sharedPreferences = requireContext().getSharedPreferences("MyPrefs2USA", Context.MODE_PRIVATE)
+        val usaListingsJson = sharedPreferences.getString("usaListings", null)
+        Log.d("SharedPreferences", "USA Listings: $usaListingsJson")*/
+
+
 
 
     }
     override fun onPause() {
         super.onPause()
         adapter.saveRentListingsToSharedPreferences(requireContext())
+        adapter_usa?.saveUsaListingsToSharedPreferences(requireContext())
     }
 
     private fun fetchDataFromAPI() {
@@ -118,18 +132,21 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
                 val response = retrofitService.getRentalPropertyListings("Detroit", "MI")
                 if (response.isSuccessful) {
                     val responseBody = response.body()
-                    Log.d("api", "API response successful: $responseBody")
+                   // Log.d("api", "API response successful: $responseBody")
                     val propertyListings = responseBody?.data?.home_search?.results ?: emptyList()
-                    Log.d("api", "API response successful: $propertyListings")
+
+                   // Log.d("api", "API response successful: $propertyListings")
+
                     if (propertyListings.isNotEmpty()) {
-                        val recomendedAdapter = Adapter(propertyListings)
+                        adapter_usa = Adapter(propertyListings)
                         // Set the adapter to the RecyclerView
-                        recomendedRecyclerView.adapter = recomendedAdapter
-                        Log.d("Adapter", "${recomendedAdapter.itemCount}")
-                        Log.d("Adapter", "Data size: ${propertyListings.size}")
+                        recomendedRecyclerView.adapter = adapter_usa
+                        adapter_usa?.saveUsaListingsToSharedPreferences(requireContext())
+                        //Log.d("Adapter", "${recomendedAdapter.itemCount}")
+                       // Log.d("Adapter", "Data size: ${propertyListings.size}")
                     } else {
                         // Handle the case where the response body is empty
-                        Log.d("recycler", "There is no data")
+                       // Log.d("recycler", "There is no data")
                     }
                 } else {
                     // Handle API error
@@ -172,6 +189,16 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
         val rentListings = gson.fromJson<List<RentListing>>(json, type) ?: emptyList()
 
         adapter.setRentListings(rentListings)
+    }
+
+    private fun loadUsaListingsFromSharedPreferences() {
+        val sharedPreferences = requireContext().getSharedPreferences("MyPrefs2USA", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("usaListings", null)
+        val type = object : TypeToken<List<Result>>() {}.type
+        val usaListings = gson.fromJson<List<Result>>(json, type) ?: emptyList()
+
+        adapter_usa?.setUsaListings(usaListings)
     }
 
 

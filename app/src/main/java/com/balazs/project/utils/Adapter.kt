@@ -1,3 +1,4 @@
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,12 +12,15 @@ import com.balazs.project.data.model.api.PropertyItem
 import com.balazs.project.data.model.api.PropertyResponse
 import com.balazs.project.data.model.api.Result
 import com.balazs.project.data.model.rv.DataTenant
+import com.balazs.project.data.model.rv.LandlordListing
+import com.balazs.project.data.model.rv.RentListing
 import com.balazs.project.presentation.RentDetailActivity
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 
 class Adapter(private val propertyListings: List<Result>) :
     RecyclerView.Adapter<Adapter.ImageViewHolder>() {
-
+    private val usaListings: MutableList<Result> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.items, parent, false)
         return ImageViewHolder(view)
@@ -35,7 +39,7 @@ class Adapter(private val propertyListings: List<Result>) :
             .load(item.data.home_search.results[position].photos[position].href)
             .into(holder.iv_photo)*/
 
-        holder.iv_photo.setImageResource(R.drawable.mock)
+        holder.iv_photo.setImageResource(R.drawable.profile)
         holder.iv_city.setImageResource(R.drawable.ic_city)
         holder.iv_star.setImageResource(R.drawable.ic_star)
 
@@ -60,5 +64,16 @@ class Adapter(private val propertyListings: List<Result>) :
         val txt_city: TextView = itemView.findViewById(R.id.txt_city)
         val txt_rating: TextView = itemView.findViewById(R.id.txt_rating)
 
+    }
+    fun saveUsaListingsToSharedPreferences(context: Context) {
+        val sharedPreferences = context.getSharedPreferences("MyPrefs2USA", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = gson.toJson(usaListings)
+        sharedPreferences.edit().putString("usaListings", json).apply()
+    }
+    fun setUsaListings(usaListings: List<Result>) {
+        this.usaListings.clear()
+        this.usaListings.addAll(usaListings)
+        //filter("") // reapply the filter after setting the new list
     }
 }

@@ -4,8 +4,7 @@ data class RentListing(
     val title: String,
     val neighborhood: String,
     val street: String,
-    val number: String,
-    val floor: String,
+    val price: String,
     val description: String,
 
 )

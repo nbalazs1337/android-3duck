@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
 import com.balazs.project.data.model.rv.RentListing
 import com.balazs.project.presentation.RentDetailActivity
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import java.util.Locale
 
@@ -23,7 +24,7 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
         // For example:
          val title: TextView = itemView.findViewById(R.id.txt_title)
          val city: TextView = itemView.findViewById(R.id.txt_city)
-         val rooms: TextView = itemView.findViewById(R.id.txt_rooms)
+         val price: TextView = itemView.findViewById(R.id.txt_rooms)
 
 
     }
@@ -42,10 +43,17 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
         // For example:
          holder.title.text = rentListing.title
          holder.city.text = rentListing.neighborhood
-        holder.rooms.text = rentListing.floor
+         holder.price.text = rentListing.price
+      /*  Glide.with(holder.itemView)
+            .load(photoUri)
+            .into(holder.photoImageView)*/
+
+
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, RentDetailActivity::class.java)
             intent.putExtra("title", holder.title.text) // pass any data to the next activity
+            intent.putExtra("city", holder.city.text) // pass any data to the next activity
+            intent.putExtra("price", holder.price.text) // pass any data to the next activity
            // intent.putExtra("city", holder.title.text) // pass any data to the next activity
             //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
             holder.itemView.context.startActivity(intent)

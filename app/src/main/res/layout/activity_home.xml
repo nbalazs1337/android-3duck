@@ -26,9 +26,9 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="348dp"
+                android:layout_width="wrap_content"
                 android:layout_height="72dp"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="0dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/app_background"
                 android:minHeight="?attr/actionBarSize"
@@ -51,7 +51,7 @@
                         android:id="@+id/button_signout"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_marginStart="116dp"
+                        android:layout_marginStart="178dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/circle_background"

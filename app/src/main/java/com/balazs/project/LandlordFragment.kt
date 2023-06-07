@@ -107,6 +107,8 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
     override fun onPause() {
         super.onPause()
         adapter.saveRentListingsToSharedPreferences(requireContext())
+
+
     }
 
 

@@ -1,11 +1,13 @@
 package com.balazs.project.presentation
 
+import android.content.Context
 import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.balazs.project.R
 import com.balazs.project.utils.TransparentStatusBarHandler
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,6 +26,9 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_rent_detail)
         TransparentStatusBarHandler.initTransparentStatusBar(window)
 
+       // val photos = intent.getStringArrayListExtra("photos")
+
+
         val btn_back : ImageButton = findViewById(R.id.btn_back_rentDetail)
         btn_back.setOnClickListener {
             finish()
@@ -34,10 +39,18 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
         val getPrice = intent.getStringExtra("price")
+        val price : TextView = findViewById(R.id.txt_price_rent_listing)
+        price.text = getPrice
 
         val getCity = intent.getStringExtra("city")
-        val city : TextView = findViewById(R.id.tv_item_name)
+        val city : TextView = findViewById(R.id.txt_city_rent)
         city.text = getCity
+
+
+        val sharedPreferences = getSharedPreferences("MyPrefsDescription", Context.MODE_PRIVATE)
+        val getDescription = sharedPreferences.getString("description", "")
+        val description : TextView = findViewById(R.id.txt_description)
+        description.text = getDescription
 
 
 
