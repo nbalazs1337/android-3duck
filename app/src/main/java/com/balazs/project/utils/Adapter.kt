@@ -36,21 +36,87 @@ class Adapter(private val propertyListings: List<Result>) :
         holder.txt_city.text = item.location.address.city
         Log.d("recycler", "${holder.txt_city.text.toString()}")
         Log.d("recycler", "${holder.txt_title.text.toString()}")
+        val photoUrl = item.photos.getOrNull(0)?.href
+        val descriptiveText = buildString {
+            // Check if the property has a name
+            item.description.name?.let { name ->
+                append("Welcome to $name!\n\n")
+            }
+
+            // Describe the number of bedrooms
+            item.description.beds_min?.let { minBeds ->
+                item.description.beds_max?.let { maxBeds ->
+                    if (minBeds == maxBeds) {
+                        append("This property has $minBeds bedroom. ")
+                    } else {
+                        append("This property has $minBeds - $maxBeds bedrooms. ")
+                    }
+                }
+            }
+
+            // Describe the number of bathrooms
+            item.description.baths_min?.let { minBaths ->
+                item.description.baths_max?.let { maxBaths ->
+                    if (minBaths == maxBaths) {
+                        append("It features $minBaths bathroom. ")
+                    } else {
+                        append("It features $minBaths - $maxBaths bathrooms. ")
+                    }
+                }
+            }
+
+            // Describe the type of property
+            item.description.type?.let { type ->
+                append("This is a $type.\n")
+            }
+
+            // Describe the year it was built
+            item.description.year_built?.let { yearBuilt ->
+                append("It was built in $yearBuilt.\n")
+            }
+
+            // Describe the garage availability
+            item.description.garage?.let { garage ->
+                append("It comes with a $garage garage.\n")
+            }
+
+            // Describe the lot square footage
+            item.description.lot_sqft?.let { lotSqft ->
+                append("The property sits on a $lotSqft sqft lot.\n")
+            }
+        }
+
 
         holder.itemView.setOnClickListener {
+
             val intent = Intent(holder.itemView.context, RentDetailActivity::class.java)
+            val longitude = item.location.address.coordinate.lon.toString()
+            val latitude = item.location.address.coordinate.lat.toString()
+            val description = item.description.toString()
+            intent.putExtra("description", descriptiveText)
             intent.putExtra("title", holder.txt_title.text) // pass any data to the next activity
             intent.putExtra("city", holder.txt_city.text) // pass any data to the next activity
+            intent.putExtra("price", holder.txt_rating.text) // pass any data to the next activity
+            intent.putExtra("lon", longitude) // pass any data to the next activity
+            intent.putExtra("lat", latitude) // pass any data to the next activity
             //intent.putExtra("price", holder.price.text) // pass any data to the next activity
             //intent.putExtra("city", holder.title.text) // pass any data to the next activity
             //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
+            intent.putExtra("photoUrl", photoUrl)
+            val photosUrls = item.photos.mapNotNull { it.href } // Extract the photo URLs
+            Log.d("idka", "${photosUrls}")
+            intent.putStringArrayListExtra("photosUrls", ArrayList(photosUrls))
             holder.itemView.context.startActivity(intent)
+
+
+            //Log.d("Adapter", "Photo URL: $photoUrl")
+
+
         }
 
-        val photoUrl = item.photos.getOrNull(0)?.href
 
         // Load the photo using a library like Glide or Picasso
-       Glide.with(holder.itemView.context)
+        Glide.with(holder.itemView.context)
             .load(photoUrl)
             .into(holder.iv_photo)
 
@@ -59,11 +125,13 @@ class Adapter(private val propertyListings: List<Result>) :
         holder.iv_star.setImageResource(R.drawable.ic_money)
 
 
-      /*  holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, RentDetailActivity::class.java)
-            //intent.putExtra("item_id", currentItem.id) // pass any data to the next activity
-            holder.itemView.context.startActivity(intent)
-        }*/
+        /*  holder.itemView.setOnClickListener {
+              val intent = Intent(holder.itemView.context, RentDetailActivity::class.java)
+              //intent.putExtra("item_id", currentItem.id) // pass any data to the next activity
+              holder.itemView.context.startActivity(intent)
+          }*/
+
+
 
     }
 
@@ -99,9 +167,16 @@ class Adapter(private val propertyListings: List<Result>) :
         val json = gson.toJson(propertyListings)
         sharedPreferences.edit().putString("usaListings", json).apply()
     }*/
-  /*  fun setUsaListings(usaListings: List<Result>) {
-        this.propertyListings.clear()
-        this.propertyListings.addAll(usaListings)
-        //filter("") // reapply the filter after setting the new list
-    }*/
+    /*  fun setUsaListings(usaListings: List<Result>) {
+          this.propertyListings.clear()
+          this.propertyListings.addAll(usaListings)
+          //filter("") // reapply the filter after setting the new list
+      }*/
+    private fun parseAndGenerateDescription(description: String?): String {
+        // Parse the JSON description and generate a descriptive text
+        // Customize this logic based on the structure and fields in your JSON
+
+        return "Generated descriptive text"
+    }
+
 }
