@@ -40,7 +40,7 @@ class AddWorkerFragment : DialogFragment() {
         builder.setView(dialogView)
             //.setTitle("Enter Text")
             .setPositiveButton("Add job") { _, _ ->
-                val title = dialogView.findViewById<EditText>(R.id.et_title).text.toString()
+
                 val service = dialogView.findViewById<EditText>(R.id.et_service).text.toString()
                 val price = dialogView.findViewById<EditText>(R.id.et_price).text.toString()
                 val city = dialogView.findViewById<EditText>(R.id.et_city).text.toString()
@@ -50,13 +50,13 @@ class AddWorkerFragment : DialogFragment() {
 
                 val sharedPreferences = requireContext().getSharedPreferences("MyPrefsWorker", Context.MODE_PRIVATE)
                 val editor = sharedPreferences.edit()
-                editor.putString("title", title)
+
                 editor.putString("service", service)
                 editor.putString("price", price)
                 editor.putString("city", city)
                 editor.putString("description", description)
                 editor.apply()
-                val workerListing = WorkerListing(title, city, price, description)
+                val workerListing = WorkerListing(service,city, price, description)
                 addWorkerListener?.onWorkerAdded(workerListing)
             }
             .setNegativeButton("Cancel", null)

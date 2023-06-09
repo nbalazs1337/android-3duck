@@ -21,7 +21,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
-    private lateinit var rv_landlord: RecyclerView
+
     private lateinit var rv_landlord_new: RecyclerView
     private lateinit var adapter: LandlordListingAdapter
     private lateinit var searchView: SearchView
@@ -58,15 +58,7 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
                 return true
             }
         })
-        rv_landlord = view.findViewById(R.id.rv_landlord_recom)
-        rv_landlord.setHasFixedSize(true)
-        rv_landlord.setLayoutManager(
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.VERTICAL,
-                false
-            )
-        )
+
 
 
         val imageList = MutableList(3) { i ->
@@ -81,14 +73,14 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
 
         }
 
-        rv_landlord.adapter = LandlordAdapter(imageList)
+
 
         rv_landlord_new = view.findViewById(R.id.rv_landlord_new)
         rv_landlord_new.setHasFixedSize(true)
         rv_landlord_new.setLayoutManager(
             LinearLayoutManager(
                 context,
-                LinearLayoutManager.HORIZONTAL,
+                LinearLayoutManager.VERTICAL,
                 false
             )
         )

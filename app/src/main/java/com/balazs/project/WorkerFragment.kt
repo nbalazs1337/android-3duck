@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 class WorkerFragment : Fragment(), AddWorkerFragment.AddWorkerListener {
 
-    private lateinit var rv_worker: RecyclerView
+
     private lateinit var newestRecyclerView: RecyclerView
     private lateinit var adapter: WorkerListingAdapter
     private val workerListings: MutableList<WorkerListing> = mutableListOf()
@@ -57,15 +57,7 @@ class WorkerFragment : Fragment(), AddWorkerFragment.AddWorkerListener {
         (requireActivity().application as MyApplication).appComponent.inject(this)
         // Fetch worker data using the WorkerApi
 
-        rv_worker = view.findViewById(R.id.rv_worker_recom)
-        rv_worker.setHasFixedSize(true)
-        rv_worker.setLayoutManager(
-            LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-        )
+
         workerViewModel.workersLiveData.observe(viewLifecycleOwner) { workers ->
             // Update UI with worker data
             val dataWorkers = workers.map { worker ->
@@ -85,7 +77,7 @@ class WorkerFragment : Fragment(), AddWorkerFragment.AddWorkerListener {
 
             }
             Log.d("tag3", "Hello + ${dataWorkers}")
-            rv_worker.adapter = WorkerAdapter(dataWorkers)
+
         }
 
         // Load workers from the database

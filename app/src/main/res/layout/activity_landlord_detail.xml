@@ -71,16 +71,6 @@
             android:scaleType="centerInside"
             android:src="@drawable/ic_left_background" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="21dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_message" />
-
 
     </RelativeLayout>
 

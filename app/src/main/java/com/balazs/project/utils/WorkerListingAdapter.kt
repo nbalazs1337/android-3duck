@@ -34,7 +34,7 @@ class WorkerListingAdapter : RecyclerView.Adapter<WorkerListingAdapter.WorkerLis
 
         // Bind the data to the views within the ViewHolder
         // For example:
-        holder.title.text = rentListing.title
+        holder.title.text = rentListing.service
         holder.city.text = rentListing.city
         holder.price.text = rentListing.price
     }

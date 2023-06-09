@@ -11,8 +11,8 @@
 
         <item
             android:id="@+id/nav_chat"
-            android:icon="@drawable/ic_chat"
-            android:title="Messages" />
+            android:icon="@drawable/ic_favorite"
+            android:title="Favorites" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"

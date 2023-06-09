@@ -154,7 +154,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 com.balazs.project.R.id.nav_chat -> {
-                    val intent = Intent(this, MessagesActivity::class.java)
+                    val intent = Intent(this, FavoriteActivity::class.java)
                     startActivity(intent)
                     true
                 }

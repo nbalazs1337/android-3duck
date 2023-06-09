@@ -6,16 +6,14 @@ import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
-import com.balazs.project.data.model.api.Photo
-import com.balazs.project.data.model.api.Result
+import com.balazs.project.data.model.rv.Favorite
+import com.balazs.project.utils.FavoriteItemsManager
 import com.balazs.project.utils.TransparentStatusBarHandler
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -59,7 +57,7 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         val getDescription = sharedPreferences.getString("description", "")
         val description: TextView = findViewById(R.id.txt_description)
         if (getUsaDescription.isNullOrEmpty()) {
-                description.text = getDescription
+            description.text = getDescription
         } else {
             description.text = getUsaDescription
             Log.d("description", "${getUsaDescription}")
@@ -74,11 +72,6 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             .into(image)
 
 
-
-
-
-
-
         // Initialize the MapView
         mapView = findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
@@ -88,11 +81,26 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         val recyclerViewImages: RecyclerView = findViewById(R.id.rv_photo)
         val imageUrls = intent.getStringArrayListExtra("photosUrls")
         Log.d("idk", "${imageUrls}")
-        recyclerViewImages.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewImages.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val adapter = imageUrls?.let { ImageAdapter(it) }
         recyclerViewImages.adapter = adapter
 
         //displayRentDetails()
+
+        //favorite rent
+        val btn_img: ImageButton = findViewById(R.id.btn_favourite)
+        btn_img.setOnClickListener {
+            val photoUrl = intent.getStringExtra("photoUrl")
+            val title = intent.getStringExtra("title")
+            val city = intent.getStringExtra("city")
+
+            // Create a FavoriteItem object
+            val favoriteItems = mutableListOf<Favorite>( Favorite(photoUrl, title, city))
+            FavoriteItemsManager.saveFavoriteItem(this, favoriteItems)
+
+
+        }
 
     }
 
@@ -172,9 +180,6 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             )
         }
     }
-
-
-
 
 
 }
