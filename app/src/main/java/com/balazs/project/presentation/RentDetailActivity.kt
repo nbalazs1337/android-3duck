@@ -40,7 +40,7 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             finish()
         }
         val getTitle = intent.getStringExtra("title")
-        val title: TextView = findViewById(R.id.tv_item_name)
+        val title: TextView = findViewById(R.id.txt_title)
         title.text = getTitle
 
 
@@ -67,7 +67,7 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val photoUrl = intent.getStringExtra("photoUrl")
         Log.d("rent", "${photoUrl}")
-        val image: ImageView = findViewById(R.id.iv_image_rent_detail)
+        val image: ImageView = findViewById(R.id.iv_background)
         // Use the retrieved data in your activity
         Glide.with(this)
             .load(photoUrl)
