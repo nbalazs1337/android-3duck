@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.balazs.project.R
 import com.balazs.project.utils.TransparentStatusBarHandler
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -139,9 +140,23 @@ class RegisterActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val user = auth.currentUser
-                        Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, HomeActivity::class.java))
-                        finish()
+
+                        // Update display name
+                        val profileUpdates = UserProfileChangeRequest.Builder()
+                            .setDisplayName(name)
+                            .build()
+
+                        user?.updateProfile(profileUpdates)?.addOnCompleteListener { updateTask ->
+                            if (updateTask.isSuccessful) {
+                                val intent = Intent(this, HomeActivity::class.java)
+
+                                Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(this, "Failed to update display name", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     } else {
                         Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }

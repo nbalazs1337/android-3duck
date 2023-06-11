@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 
 import android.widget.ImageButton
 import androidx.appcompat.widget.Toolbar;
@@ -23,6 +24,7 @@ import androidx.room.Room
 import com.balazs.project.persistence.entity.WorkerEntity
 import com.balazs.project.persistence.localApi.WorkerApi
 import com.balazs.project.utils.TransparentStatusBarHandler
+import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -79,11 +81,26 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val user = FirebaseAuth.getInstance().currentUser
+        val profilePic = findViewById<CircleImageView>(com.balazs.project.R.id.button_signout)
+        if (user != null && user.photoUrl != null) {
+            val profilePhotoUrl = user?.photoUrl.toString()
 
+            Glide.with(this)
+                .load(profilePhotoUrl)
+                .placeholder(com.balazs.project.R.drawable.profile) // Optional placeholder image while loading
+                .error(com.balazs.project.R.drawable.profile) // Optional error image if the loading fails
+                .circleCrop() // Apply circular cropping to the image
+                .into(profilePic)
 
+        }
+        else {
+            // If the user doesn't have a profile photo, you can set a default image
+            profilePic.setImageResource(com.balazs.project.R.drawable.profile)
+        }
 
-        val email = intent.getStringExtra("email")
-        val displayName = intent.getStringExtra("name")
+        val email = user?.email
+        val displayName = user?.displayName
         findViewById<TextView>(com.balazs.project.R.id.txt_name).text = "Hi, ${displayName}"
 
         findViewById<CircleImageView>(com.balazs.project.R.id.button_signout).setOnClickListener {
@@ -100,6 +117,7 @@ class HomeActivity : AppCompatActivity() {
         toolbar = findViewById(com.balazs.project.R.id.toolbar)
         setSupportActionBar(toolbar)
         drawerLayout = findViewById(com.balazs.project.R.id.drawer_layout)
+
         actionBarToggle = ActionBarDrawerToggle(
             this,
             drawerLayout, toolbar,
@@ -145,10 +163,17 @@ class HomeActivity : AppCompatActivity() {
 
         // Call setNavigationItemSelectedListener on the NavigationView to detect when items are clicked
         TransparentStatusBarHandler.initTransparentStatusBar(window)
+       val nameTextView =  navigationView.getHeaderView(0).findViewById<TextView>(com.balazs.project.R.id.name)
+       val emailTextView =  navigationView.getHeaderView(0).findViewById<TextView>(com.balazs.project.R.id.username)
+        nameTextView.text = user?.displayName
+        emailTextView.text = user?.email
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 com.balazs.project.R.id.nav_profile -> {
+
                     val intent = Intent(this, ProfileActivity::class.java)
+                    intent.putExtra("name", nameTextView.text)
+                    intent.putExtra("email", emailTextView.text)
                     startActivity(intent)
 
                     true

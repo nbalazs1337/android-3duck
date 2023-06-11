@@ -14,11 +14,12 @@
         android:paddingBottom="20dp">
 
         <RelativeLayout
+
             android:id="@+id/imgUser"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="70dp"
             android:background="@drawable/et_background">
 
             <ImageView
@@ -62,11 +63,11 @@
 
         <ImageButton
             android:id="@+id/btn_back"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="338dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="299dp"
             android:adjustViewBounds="true"
             android:background="@drawable/search_bg"
             android:scaleType="centerInside"
@@ -111,6 +112,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -122,6 +124,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
@@ -198,6 +201,7 @@
             </LinearLayout>
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -234,17 +238,15 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginTop="40dp"
-            android:text="Edit"
+            android:text="Log Out"
+            android:textColor="@color/white"
             android:background="@drawable/button_background"
-            app:layout_constraintTop_toBottomOf="@+id/first_linear"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="100dp"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="394dp"></Button>
-
-
+            app:layout_constraintTop_toBottomOf="@+id/first_linear"></Button>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

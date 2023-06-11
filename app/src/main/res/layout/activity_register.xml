@@ -135,85 +135,53 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="42dp"
-        android:layout_marginRight="270dp"
         android:background="@color/black"
-        app:layout_constraintEnd_toStartOf="@id/txt_register"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_register" />
 
     <View
+        android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="270dp"
         android:layout_marginTop="42dp"
         android:background="@color/black"
-        app:layout_constraintEnd_toStartOf="@id/txt_register"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_register" />
 
-    <TextView
-        android:id="@+id/txt_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="or Register in with"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_register"></TextView>
-
-
-    <Button
-        android:id="@+id/button_google"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginHorizontal="130dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/google_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.524"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_register"
-        app:layout_constraintVertical_bias="0.0"></Button>
 
     <TextView
         android:id="@+id/txt_dont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:text="Don't have an account?"
+        android:text="Already have an account?"
         android:textColor="@color/black"
         android:textSize="15sp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_google"></TextView>
-
+        app:layout_constraintTop_toBottomOf="@+id/view"></TextView>
 
     <TextView
         android:id="@+id/txt_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="76dp"
-        android:text="Sign In"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Sign In"
         android:textColor="@color/app_green"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/txt_dont"
-        app:layout_constraintTop_toBottomOf="@+id/button_google"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/view2"></TextView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

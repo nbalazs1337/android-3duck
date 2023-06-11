@@ -55,8 +55,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.userLiveData.observe(this, Observer { user ->
             val intent = Intent(this, HomeActivity::class.java)
-            intent.putExtra("email", user.email)
-            intent.putExtra("name", user.name)
+
             startActivity(intent)
         })
 
