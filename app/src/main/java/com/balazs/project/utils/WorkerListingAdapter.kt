@@ -1,5 +1,6 @@
 package com.balazs.project.utils
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
 import com.balazs.project.data.model.rv.RentListing
 import com.balazs.project.data.model.rv.WorkerListing
+import com.balazs.project.presentation.LandlordDetailActivity
+import com.balazs.project.presentation.WorkerDetailActivity
 
 class WorkerListingAdapter : RecyclerView.Adapter<WorkerListingAdapter.WorkerListingViewHolder>() {
 
@@ -37,7 +40,10 @@ class WorkerListingAdapter : RecyclerView.Adapter<WorkerListingAdapter.WorkerLis
         holder.title.text = rentListing.service
         holder.city.text = rentListing.city
         holder.price.text = rentListing.price
-    }
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, WorkerDetailActivity::class.java)
+            holder.itemView.context.startActivity(intent)
+    }}
 
     override fun getItemCount(): Int {
         return workerListings.size
