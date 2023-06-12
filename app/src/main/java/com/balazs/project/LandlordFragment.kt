@@ -46,7 +46,7 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
         adapter = LandlordListingAdapter()
         searchView = view.findViewById(R.id.search_view)
 
-        val txt_name:TextView = view.findViewById(R.id.tv_name)
+
 
 
 

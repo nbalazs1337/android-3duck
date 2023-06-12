@@ -41,12 +41,16 @@ class AddLandlordFragment : DialogFragment() {
         builder.setView(dialogView)
             //.setTitle("Enter Text")
             .setPositiveButton("Add a Service") { _, _ ->
+                val sharedPreferencesPhone = requireContext().getSharedPreferences("MyPrefsPhone", Context.MODE_PRIVATE)
+                val editorPhone = sharedPreferencesPhone.edit()
                 val name = dialogView.findViewById<EditText>(R.id.et_name).text.toString()
                 val service = dialogView.findViewById<EditText>(R.id.et_service).text.toString()
                 val price = dialogView.findViewById<EditText>(R.id.et_price).text.toString()
                 val experience = dialogView.findViewById<EditText>(R.id.et_exp).text.toString()
-                val description = dialogView.findViewById<EditText>(R.id.et_description).text.toString()
-
+                val phoneNumber = dialogView.findViewById<EditText>(R.id.et_phoneNumber).text.toString()
+                editorPhone.putString("phone", phoneNumber)
+                editorPhone.putString("experience", experience)
+                editorPhone.apply()
 
 
                 val sharedPreferences = requireContext().getSharedPreferences("MyPrefsLandlord", Context.MODE_PRIVATE)
@@ -55,10 +59,10 @@ class AddLandlordFragment : DialogFragment() {
                 editor.putString("service", service)
                 editor.putString("price", price)
                 editor.putString("experience", experience)
-                editor.putString("description", description)
+                editor.putString("phoneNumber", phoneNumber)
 
                 editor.apply()
-                val landlordListing = LandlordListing(name, service, price, experience, description)
+                val landlordListing = LandlordListing(name, service, price, experience, phoneNumber)
                 addLandlordListener?.onLandlordAdded(landlordListing)
             }
             .setNegativeButton("Cancel", null)

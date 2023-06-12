@@ -187,16 +187,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email"
+                    android:text="Price/hour"
                     android:textStyle="bold"
                     android:textColor="@color/app_darkblue"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/txt_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="joey@sharenofood.com"
+                    android:text="45$"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -223,6 +224,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/txt_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
@@ -247,16 +249,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="City"
+                    android:text="Experience"
                     android:textStyle="bold"
                     android:textColor="@color/app_darkblue"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/txt_experience"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Cluj-Napoca"
+                    android:text="2 years"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -277,7 +280,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Country"
+                    android:text="City"
                     android:textColor="@color/app_darkblue"
                     android:textStyle="bold"
                     android:textSize="16sp" />
@@ -286,7 +289,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Romania"
+                    android:text="Cluj-Napoca"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 

@@ -7,5 +7,5 @@ data class LandlordListing(
     val price: String,
     //val phoneNumb: String,
     val experience: String,
-    val description: String,
+    val phoneNumber: String,
 )
