@@ -182,6 +182,14 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
         // Add the rentListing to your RecyclerView adapter here
         adapter.addRentListing(rentListing)
         adapter.notifyDataSetChanged()
+        // Set the first photo from the added photos to the RecyclerView's item
+        if (rentListing.photoUrl.isNotEmpty()) {
+            val firstPhoto = rentListing.photoUrl[0]
+            Log.d("photo", "First Photo Tenant Fragment ${firstPhoto}")
+            // Assuming you have a position to update, set the photoUri to the corresponding item in the adapter
+            // Replace `position` with the actual position where you want to set the photo
+            adapter.setPhotoUri(0, firstPhoto)
+        }
     }
 
     private fun performSearch(query: String) {

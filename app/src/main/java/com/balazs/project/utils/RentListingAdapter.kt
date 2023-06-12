@@ -1,10 +1,12 @@
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
@@ -22,9 +24,10 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
     inner class RentListingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Define and initialize views within the ViewHolder
         // For example:
-         val title: TextView = itemView.findViewById(R.id.txt_title)
-         val city: TextView = itemView.findViewById(R.id.txt_city)
-         val price: TextView = itemView.findViewById(R.id.txt_rooms)
+        val title: TextView = itemView.findViewById(R.id.txt_title)
+        val city: TextView = itemView.findViewById(R.id.txt_city)
+        val price: TextView = itemView.findViewById(R.id.txt_rooms)
+        val img: ImageView = itemView.findViewById(R.id.iv_mock)
 
 
     }
@@ -41,12 +44,22 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
 
         // Bind the data to the views within the ViewHolder
         // For example:
-         holder.title.text = rentListing.title
-         holder.city.text = rentListing.neighborhood
-         holder.price.text = rentListing.price
-      /*  Glide.with(holder.itemView)
-            .load(photoUri)
-            .into(holder.photoImageView)*/
+        holder.title.text = rentListing.title
+        holder.city.text = rentListing.neighborhood
+        holder.price.text = rentListing.price
+
+        /*  Glide.with(holder.itemView)
+              .load(photoUri)
+              .into(holder.photoImageView)*/
+        Log.d("photo", "Photo from adapter 2${rentListing.photoUrl}")
+        if (rentListing.photoUrl != null) {
+            Glide.with(holder.itemView.context)
+                .load(rentListing.photoUrl)
+                .into(holder.img)
+        } else {
+            // Set a default image or hide the ImageView
+            holder.img.setImageResource(R.drawable.mock)
+        }
 
 
         holder.itemView.setOnClickListener {
@@ -54,7 +67,7 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
             intent.putExtra("title", holder.title.text) // pass any data to the next activity
             intent.putExtra("city", holder.city.text) // pass any data to the next activity
             intent.putExtra("price", holder.price.text) // pass any data to the next activity
-           // intent.putExtra("city", holder.title.text) // pass any data to the next activity
+            // intent.putExtra("city", holder.title.text) // pass any data to the next activity
             //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
             holder.itemView.context.startActivity(intent)
         }
@@ -89,11 +102,23 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
         this.rentListings.addAll(rentListings)
         filter("") // reapply the filter after setting the new list
     }
+
     fun saveRentListingsToSharedPreferences(context: Context) {
         val sharedPreferences = context.getSharedPreferences("MyPrefs2", Context.MODE_PRIVATE)
         val gson = Gson()
         val json = gson.toJson(rentListings)
         sharedPreferences.edit().putString("rentListings", json).apply()
+    }
+
+    fun setPhotoUri(position: Int, photoUri: String) {
+        if (position in rentListings.indices) {
+            val rentListing = rentListings[position]
+            if (rentListing.photoUrl == null) {
+                rentListing.photoUrl = mutableListOf() // Initialize as an empty list
+            }
+            rentListing.photoUrl.add(photoUri)
+            notifyItemChanged(position)
+        }
     }
 
 

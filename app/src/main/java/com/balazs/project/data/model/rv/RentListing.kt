@@ -6,5 +6,6 @@ data class RentListing(
     val street: String,
     val price: String,
     val description: String,
+    var photoUrl: MutableList<String>
 
 )

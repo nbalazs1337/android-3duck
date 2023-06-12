@@ -1,6 +1,5 @@
 package com.balazs.project.presentation
 
-import RentListingAdapter
 import android.app.Activity
 import com.balazs.project.R
 
@@ -12,6 +11,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
@@ -55,7 +55,7 @@ class AddRentFragment : DialogFragment() {
                 val cartier = dialogView.findViewById<EditText>(R.id.et_cartier).text.toString()
                 val street = dialogView.findViewById<EditText>(R.id.et_street).text.toString()
                 val number = dialogView.findViewById<EditText>(R.id.et_number).text.toString()
-               // val floor = dialogView.findViewById<EditText>(R.id.et_floor).text.toString()
+               // val photo = dialogView.findViewById<EditText>(R.id.et_floor).text.toString()
 
 
                 val description = dialogView.findViewById<EditText>(R.id.et_description).text.toString()
@@ -72,7 +72,7 @@ class AddRentFragment : DialogFragment() {
                 //editor.putString("floor", floor)
                 editor.putString("description", description)
                 editor.apply()
-                val rentListing = RentListing(title,cartier,street, number, description)
+                val rentListing = RentListing(title,cartier,street, number, description,selectedPhotos )
                 addRentListener?.onRentAdded(rentListing)
             }
             .setNegativeButton("Cancel", null)
@@ -92,8 +92,11 @@ class AddRentFragment : DialogFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val selectedImageUri: Uri? = data?.data
+            Log.d("photo", "From Add Rent Fragment ${selectedImageUri}")
             if (selectedImageUri != null) {
                 selectedPhotos.add(selectedImageUri.toString())
+                Log.d("photo", "From Add Rent Fragment ${selectedPhotos}")
+
 
             }
         }
