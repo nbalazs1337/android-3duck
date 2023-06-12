@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,6 +45,11 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
         super.onViewCreated(view, savedInstanceState)
         adapter = LandlordListingAdapter()
         searchView = view.findViewById(R.id.search_view)
+
+        val txt_name:TextView = view.findViewById(R.id.tv_name)
+
+
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // Perform the search action when the user submits the query

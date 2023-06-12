@@ -45,7 +45,9 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
         holder.price.text = landlordListing.price
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, LandlordDetailActivity::class.java)
-            intent.putExtra("title", holder.title.text) // pass any data to the next activity
+            intent.putExtra("title", holder.title.text)
+            intent.putExtra("name", holder.name.text)// pass any data to the next activity
+            intent.putExtra("price", holder.price.text)// pass any data to the next activity
             // intent.putExtra("city", holder.title.text) // pass any data to the next activity
             //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
             holder.itemView.context.startActivity(intent)
