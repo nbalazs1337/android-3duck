@@ -96,7 +96,9 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             val city = intent.getStringExtra("city")
 
             // Create a FavoriteItem object
-            val favoriteItems = mutableListOf<Favorite>( Favorite(photoUrl, title, city))
+            val favoriteItems = FavoriteItemsManager.getFavoriteItems(this).toMutableList()
+            val newFavoriteItem = Favorite(photoUrl, title, city)
+            favoriteItems.add(newFavoriteItem)
             FavoriteItemsManager.saveFavoriteItem(this, favoriteItems)
 
 
