@@ -27,6 +27,7 @@ import java.io.IOException
 class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mapView: MapView
+    private var isFavorite: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rent_detail)
@@ -91,6 +92,10 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         //favorite rent
         val btn_img: ImageButton = findViewById(R.id.btn_favourite)
         btn_img.setOnClickListener {
+
+            isFavorite = !isFavorite
+            val heartIcon = if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+            btn_img.setImageResource(heartIcon)
             val photoUrl = intent.getStringExtra("photoUrl")
             val title = intent.getStringExtra("title")
             val city = intent.getStringExtra("city")
