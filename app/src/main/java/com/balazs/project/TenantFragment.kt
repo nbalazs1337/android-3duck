@@ -143,7 +143,8 @@ class TenantFragment : Fragment(),AddRentFragment.AddRentListener {
                         val responseBody = response.body()
                         val propertyListings = responseBody?.data?.home_search?.results ?: emptyList()
                         showData(propertyListings)
-
+                        Log.d("api", "${response.code()}")
+                        Log.d("api", "${propertyListings}")
                         // Save the fetched data to SharedPreferences
                         val listingsJson = Gson().toJson(propertyListings)
                         sharedPreferences.edit().putString("usa_listings", listingsJson).apply()

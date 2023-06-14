@@ -8,9 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balazs.project.R
 import com.balazs.project.data.model.rv.LandlordListing
-import com.balazs.project.data.model.rv.RentListing
 import com.balazs.project.presentation.LandlordDetailActivity
-import com.balazs.project.presentation.RentDetailActivity
 import com.google.gson.Gson
 import java.util.Locale
 
@@ -22,8 +20,8 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
     inner class LandlordListingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Define and initialize views within the ViewHolder
         // For example:
-        val title: TextView = itemView.findViewById(R.id.txt_title_landlord)
-        val name: TextView = itemView.findViewById(R.id.txt_name_landlord)
+        val title: TextView = itemView.findViewById(R.id.txt_title_notification)
+        val name: TextView = itemView.findViewById(R.id.txt_name_notification)
         val price: TextView = itemView.findViewById(R.id.txt_price_landlord)
 
 

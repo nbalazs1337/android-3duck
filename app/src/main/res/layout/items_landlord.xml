@@ -16,7 +16,7 @@
 
 
     <TextView
-        android:id="@+id/txt_title_landlord"
+        android:id="@+id/txt_title_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/iv_mock_landlord"></TextView>
+        app:layout_constraintStart_toEndOf="@+id/iv_notification"></TextView>
 
     <TextView
         android:id="@+id/txt_price_landlord"
@@ -40,12 +40,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.682"
-        app:layout_constraintStart_toEndOf="@+id/txt_name_landlord"
+        app:layout_constraintStart_toEndOf="@+id/txt_name_notification"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.266"></TextView>
 
     <ImageView
-        android:id="@+id/iv_mock_landlord"
+        android:id="@+id/iv_notification"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/rounded_img"
@@ -70,20 +70,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.94"
-        app:layout_constraintStart_toEndOf="@+id/iv_mock_landlord"
+        app:layout_constraintStart_toEndOf="@+id/iv_notification"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"></ImageView>
 
     <TextView
-        android:id="@+id/txt_name_landlord"
+        android:id="@+id/txt_name_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kovacs Attila"
         android:layout_marginLeft="10dp"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/txt_title_landlord"
+        app:layout_constraintBottom_toTopOf="@+id/txt_title_notification"
         app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintStart_toEndOf="@+id/iv_mock_landlord"
+        app:layout_constraintStart_toEndOf="@+id/iv_notification"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.666" />
 </androidx.constraintlayout.widget.ConstraintLayout>
