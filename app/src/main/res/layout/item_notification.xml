@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/app_darkblue"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -16,18 +17,19 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:text="BathRoom tap repair"
-        android:textColor="@color/black"
+        android:textColor="@color/app_green"
         android:layout_toRightOf="@id/iv_notification"
         android:textSize="15sp"></TextView>
 
     <ImageView
         android:id="@+id/iv_notification"
-        android:layout_width="60dp"
+        android:layout_width="48dp"
         android:layout_marginLeft="10dp"
-        android:layout_height="60dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rounded_img"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_notification"></ImageView>
+        android:src="@drawable/logopng"></ImageView>
 
     <TextView
         android:id="@+id/txt_name_notification"
@@ -37,8 +39,8 @@
         android:text="New Notification"
         android:layout_toRightOf="@id/iv_notification"
         android:layout_below="@+id/txt_title_notification"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         android:textStyle="bold"/>
     </RelativeLayout>
 </RelativeLayout>

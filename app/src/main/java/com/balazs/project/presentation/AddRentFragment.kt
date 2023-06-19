@@ -15,10 +15,14 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
+import com.balazs.project.MyFirebaseMessagingService
 import com.balazs.project.data.model.rv.RentListing
+import com.google.firebase.auth.FirebaseAuth
 
 
 class AddRentFragment : DialogFragment() {
+
+
     companion object {
         private const val GALLERY_REQUEST_CODE = 1001
     }
@@ -51,6 +55,16 @@ class AddRentFragment : DialogFragment() {
         builder.setView(dialogView)
             //.setTitle("Enter Text")
             .setPositiveButton("Add Rent") { _, _ ->
+
+                val user = FirebaseAuth.getInstance().currentUser
+                // Send push notification
+                val title_notification = "${user} just added a New Rent!"
+                val message = "Check it out!"
+
+                val notificationService = MyFirebaseMessagingService()
+                notificationService.generateNotification(requireContext(), title_notification, message)
+
+
                 val title = dialogView.findViewById<EditText>(R.id.et_title).text.toString()
                 val cartier = dialogView.findViewById<EditText>(R.id.et_cartier).text.toString()
                 val street = dialogView.findViewById<EditText>(R.id.et_street).text.toString()
