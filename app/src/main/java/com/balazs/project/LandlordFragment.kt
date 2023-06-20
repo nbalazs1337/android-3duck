@@ -67,17 +67,7 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
 
 
 
-        val imageList = MutableList(3) { i ->
-            DataLandlord(
-                R.drawable.hammer,
-                "",
-                "",
-                "",
-                R.drawable.ic_city,
 
-            )
-
-        }
 
 
 

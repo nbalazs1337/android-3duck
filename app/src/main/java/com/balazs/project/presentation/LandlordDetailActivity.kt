@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,6 +16,11 @@ class LandlordDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landlord_detail)
         TransparentStatusBarHandler.initTransparentStatusBar(window)
+
+        val btn_review : Button = findViewById(R.id.btn_add_review)
+        btn_review.setOnClickListener {
+            
+        }
 
         val btn_back : ImageView = findViewById(R.id.back)
         btn_back.setOnClickListener {
