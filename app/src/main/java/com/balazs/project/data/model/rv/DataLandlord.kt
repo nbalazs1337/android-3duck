@@ -1,6 +1,7 @@
 package com.balazs.project.data.model.rv
 
 data class DataLandlord(
+    val id: String,
     val iv_coverID: Int,
     val txt_title: String,
     val txt_name: String,

@@ -38,6 +38,7 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
 
         // Bind the data to the views within the ViewHolder
         // For example:
+
         holder.title.text = landlordListing.service
         holder.name.text = landlordListing.name
         holder.price.text = landlordListing.price
@@ -46,6 +47,7 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
             intent.putExtra("title", holder.title.text)
             intent.putExtra("name", holder.name.text)// pass any data to the next activity
             intent.putExtra("price", holder.price.text)// pass any data to the next activity
+            intent.putExtra("itemId", holder.itemId.toString())// pass any data to the next activity
             // intent.putExtra("city", holder.title.text) // pass any data to the next activity
             //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
             holder.itemView.context.startActivity(intent)
