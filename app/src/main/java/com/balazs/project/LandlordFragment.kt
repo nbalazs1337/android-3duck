@@ -26,9 +26,10 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
     private lateinit var rv_landlord_new: RecyclerView
     private lateinit var adapter: LandlordListingAdapter
     private lateinit var searchView: SearchView
-    private val landlordListings: MutableList<LandlordListing> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -67,17 +68,7 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
 
 
 
-        val imageList = MutableList(3) { i ->
-            DataLandlord(
-                R.drawable.hammer,
-                "",
-                "",
-                "",
-                R.drawable.ic_city,
 
-            )
-
-        }
 
 
 
@@ -139,7 +130,11 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
         val landlordListings = gson.fromJson<List<LandlordListing>>(json, type) ?: emptyList()
 
         adapter.setLandlordListings(landlordListings)
+
+
     }
+
+
 
 
 

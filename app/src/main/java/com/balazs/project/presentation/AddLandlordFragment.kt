@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import com.balazs.project.data.model.rv.RentListing
+import java.util.UUID
 
 
 class AddLandlordFragment : DialogFragment() {
@@ -62,7 +63,7 @@ class AddLandlordFragment : DialogFragment() {
                 editor.putString("phoneNumber", phoneNumber)
 
                 editor.apply()
-                val landlordListing = LandlordListing(name, service, price, experience, phoneNumber)
+                val landlordListing = LandlordListing(UUID.randomUUID().toString(),name, service, price, experience, phoneNumber)
                 addLandlordListener?.onLandlordAdded(landlordListing)
             }
             .setNegativeButton("Cancel", null)
