@@ -1,6 +1,7 @@
 package com.balazs.project.utils
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,8 +26,8 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
         val title: TextView = itemView.findViewById(R.id.txt_title_notification)
         val name: TextView = itemView.findViewById(R.id.txt_name_notification)
         val price: TextView = itemView.findViewById(R.id.txt_price_landlord)
-        val rating: TextView = itemView.findViewById(R.id.txt_rating_average)
-        var itemId: String? = UUID.randomUUID().toString()
+        val rating: TextView = itemView.findViewById(R.id.txt_rating_average_item)
+
 
 
     }
@@ -49,9 +50,13 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
 
         // Retrieve the rating from SharedPreferences based on the item ID
         val sharedPreferences = holder.itemView.context.getSharedPreferences("ItemRatings", Context.MODE_PRIVATE)
-        val savedRating = sharedPreferences.getFloat("${holder.itemId}-averageRating", 0.0f)
+        val savedRating = sharedPreferences.getFloat("${landlordListing.itemId}-averageRating", 0.0f)
+        Log.d("raating", "$savedRating")
+        Log.d("raating", "${landlordListing.itemId}")
+
 
         // Update the TextView for the rating or average rating
+        holder.rating.visibility = View.VISIBLE
         holder.rating.text = savedRating.toString()
 
 
@@ -61,7 +66,7 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
             intent.putExtra("title", holder.title.text)
             intent.putExtra("name", holder.name.text)// pass any data to the next activity
             intent.putExtra("price", holder.price.text)// pass any data to the next activity
-            intent.putExtra("itemId", holder.itemId)// pass any data to the next activity
+            intent.putExtra("itemId", landlordListing.itemId)// pass any data to the next activity
             // intent.putExtra("city", holder.title.text) // pass any data to the next activity
             //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
             holder.itemView.context.startActivity(intent)
@@ -75,8 +80,11 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
     }
 
     fun addLandlordListing(landlordListing: LandlordListing) {
-        landlordListings.add(landlordListing)
-        filteredLandlordListings.add(landlordListing)
+
+        val randomUUID = UUID.randomUUID().toString() // Generate a random ID
+        val updatedLandlordListing = landlordListing.copy(itemId = randomUUID) // Update the itemId with the generated ID
+        landlordListings.add(updatedLandlordListing)
+        filteredLandlordListings.add(updatedLandlordListing)
         notifyDataSetChanged()
     }
     fun filter(query: String) {

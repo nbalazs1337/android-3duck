@@ -19,6 +19,7 @@ class LandlordDetailActivity : AppCompatActivity() {
     private var bigAverage: Float = 0.0f
     private var finalResult: Float = 0.0f
     private var formattedResult: Float = 0.0f
+    private var averageRating: Float = 0.0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +31,17 @@ class LandlordDetailActivity : AppCompatActivity() {
         val price: String = intent.getStringExtra("price").toString()
         val itemId: String = intent.getStringExtra("itemId").toString()
 
+        Log.d("idd", "${itemId}")
+
         val txt_rating_average: TextView = findViewById(R.id.txt_rating_average)
         val txt_rating_counter: TextView = findViewById(R.id.txt_rating_counter)
 
 
-        val averageRating = RatingManager.getAverageRating(this@LandlordDetailActivity, itemId)
+        averageRating = RatingManager.getAverageRating(this@LandlordDetailActivity, itemId)
+        Log.d("savingRating", "${averageRating}")
         reviewCount = RatingManager.getReviewCount(this@LandlordDetailActivity, itemId)
-        formattedResult = RatingManager.getAverageRating(this@LandlordDetailActivity, itemId)
+        Log.d("savingRating", "${reviewCount}")
+
         txt_rating_average.text = averageRating.toString()
         txt_rating_counter.text = reviewCount.toString()
 
@@ -61,33 +66,22 @@ class LandlordDetailActivity : AppCompatActivity() {
                     bigAverage = bigAverage + ratingData!!.calculateAverage()
                     finalResult = bigAverage / reviewCount
                     formattedResult = String.format("%.2f", finalResult).toFloat()
+                    txt_rating_average.text = formattedResult.toString()
+                    txt_rating_counter.text = reviewCount.toString()
+
+                    Log.d("savingRating", "After saving${formattedResult}")
+                    Log.d("savingRating", "After saving ${reviewCount}")
+
+                    RatingManager.saveRatingData(this@LandlordDetailActivity, itemId, formattedResult, reviewCount)
+
 
 
                     // Save the average rating to SharedPreferences
 
                     Log.d("rating", "${itemId}")
-                    RatingManager.saveRatingData(
-                        this@LandlordDetailActivity,
-                        itemId,
-                        formattedResult.toFloat(),
-                        reviewCount
-                    )
-                    // Retrieve the average rating and review count from SharedPreferences
-                    val averageRating =
-                        RatingManager.getAverageRating(this@LandlordDetailActivity, itemId)
-                    var reviewCount2 =
-                        RatingManager.getReviewCount(this@LandlordDetailActivity, itemId)
 
-                    val newAverage = ((averageRating * reviewCount2) + ratingData!!.calculateAverage()) / reviewCount2
-                    val formatedNewaverage = String.format("%.2f", newAverage).toFloat()
-                    txt_rating_average.text = formatedNewaverage.toString()
-                    txt_rating_counter.text = reviewCount2.toString()
-                    RatingManager.saveRatingData(
-                        this@LandlordDetailActivity,
-                        itemId,
-                       formatedNewaverage,
-                        reviewCount2
-                    )
+                    // Retrieve the average rating and review count from SharedPreferences
+
 
 
                     // Use the rating data in the RentDetailActivity or LandlordFragment
