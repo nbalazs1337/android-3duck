@@ -16,6 +16,7 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
 
     private val landlordListings: MutableList<LandlordListing> = mutableListOf()
     private val filteredLandlordListings: MutableList<LandlordListing> = mutableListOf()
+    private val ratingMap: MutableMap<String, Pair<Float, Int>> = mutableMapOf()
 
     inner class LandlordListingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Define and initialize views within the ViewHolder
@@ -23,6 +24,8 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
         val title: TextView = itemView.findViewById(R.id.txt_title_notification)
         val name: TextView = itemView.findViewById(R.id.txt_name_notification)
         val price: TextView = itemView.findViewById(R.id.txt_price_landlord)
+        val rating: TextView = itemView.findViewById(R.id.txt_rating_average)
+        var itemId: String? = null
 
 
     }
@@ -36,22 +39,34 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
     override fun onBindViewHolder(holder: LandlordListingViewHolder, position: Int) {
         val landlordListing = landlordListings[position]
 
+
         // Bind the data to the views within the ViewHolder
         // For example:
 
         holder.title.text = landlordListing.service
         holder.name.text = landlordListing.name
+
+        // Retrieve the rating from SharedPreferences based on the item ID
+        val sharedPreferences = holder.itemView.context.getSharedPreferences("ItemRatings", Context.MODE_PRIVATE)
+        val savedRating = sharedPreferences.getFloat("${holder.itemId}-averageRating", 0.0f)
+
+        // Update the TextView for the rating or average rating
+        holder.rating.text = savedRating.toString()
+
+
         holder.price.text = landlordListing.price
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, LandlordDetailActivity::class.java)
             intent.putExtra("title", holder.title.text)
             intent.putExtra("name", holder.name.text)// pass any data to the next activity
             intent.putExtra("price", holder.price.text)// pass any data to the next activity
-            intent.putExtra("itemId", holder.itemId.toString())// pass any data to the next activity
+            intent.putExtra("itemId", holder.itemId)// pass any data to the next activity
             // intent.putExtra("city", holder.title.text) // pass any data to the next activity
             //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
             holder.itemView.context.startActivity(intent)
         }
+
+
     }
 
     override fun getItemCount(): Int {
@@ -87,4 +102,5 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
         val json = gson.toJson(landlordListings)
         sharedPreferences.edit().putString("landlordListings", json).apply()
     }
+    
 }

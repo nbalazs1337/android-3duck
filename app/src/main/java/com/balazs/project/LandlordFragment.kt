@@ -27,8 +27,10 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
     private lateinit var adapter: LandlordListingAdapter
     private lateinit var searchView: SearchView
     private val landlordListings: MutableList<LandlordListing> = mutableListOf()
+    private val ratingMap: MutableMap<String, Pair<Float, Int>> = mutableMapOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -129,7 +131,11 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
         val landlordListings = gson.fromJson<List<LandlordListing>>(json, type) ?: emptyList()
 
         adapter.setLandlordListings(landlordListings)
+
+
     }
+
+
 
 
 

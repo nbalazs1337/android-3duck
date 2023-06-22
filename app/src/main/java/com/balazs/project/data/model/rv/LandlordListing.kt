@@ -8,4 +8,5 @@ data class LandlordListing(
     //val phoneNumb: String,
     val experience: String,
     val phoneNumber: String,
+    var rating: Float = 0.0f
 )
