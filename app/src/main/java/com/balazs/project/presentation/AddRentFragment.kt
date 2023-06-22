@@ -58,8 +58,9 @@ class AddRentFragment : DialogFragment() {
 
                 val user = FirebaseAuth.getInstance().currentUser
                 // Send push notification
-                val title_notification = "${user} just added a New Rent!"
+                val title_notification = "Someone just added a New Rent!"
                 val message = "Check it out!"
+
 
                 val notificationService = MyFirebaseMessagingService()
                 notificationService.generateNotification(requireContext(), title_notification, message)

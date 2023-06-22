@@ -7,11 +7,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Build.VERSION_CODES
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.balazs.project.presentation.HomeActivity
 import com.balazs.project.presentation.NotificationActivity
+import com.balazs.project.utils.NotificationStorageManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -24,7 +26,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         if(remoteMessage.getNotification() != null){
             val title = remoteMessage.notification!!.title!!
             val message = remoteMessage.notification!!.body!!
-
+           // Log.d("lets", "yooo")
             generateNotification(this, title, message)
 
             // Store the notification in SharedPreferences
@@ -38,6 +40,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         remoteView.setTextViewText(R.id.txt_title_notification, title)
         remoteView.setTextViewText(R.id.txt_name_notification, message)
         remoteView.setImageViewResource(R.id.iv_notification, R.drawable.logopng)
+        Log.d("lets", "yooo")
 
         return remoteView
     }
@@ -46,6 +49,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val intent = Intent(this, HomeActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
+        Log.d("lets", "$title")
+        Log.d("lets", "$message")
+        NotificationStorageManager.saveNotifications(context, title, message)
 
 
         var builder: NotificationCompat.Builder =
@@ -73,7 +79,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // Create an intent to notify the NotificationActivity
         val intent = Intent(this, NotificationActivity::class.java)
         intent.putExtra("title", title)
+        Log.d("notii", "${title}")
+
         intent.putExtra("message", message)
+        Log.d("notii", "${message}")
 
         // Send a broadcast to the NotificationActivity with the intent
         sendBroadcast(intent)

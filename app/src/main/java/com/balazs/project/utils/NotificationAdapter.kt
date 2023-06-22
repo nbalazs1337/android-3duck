@@ -1,5 +1,6 @@
 package com.balazs.project.utils
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,13 @@ import com.balazs.project.data.model.Notification
 class NotificationAdapter(private val notifications: List<Notification>) :
     RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val titleTextView: TextView = itemView.findViewById(R.id.txt_title_notification)
+         val messageTextView: TextView = itemView.findViewById(R.id.txt_name_notification)
+
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_notification, parent, false)
         return ViewHolder(view)
@@ -18,20 +26,14 @@ class NotificationAdapter(private val notifications: List<Notification>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val notification = notifications[position]
-        holder.bind(notification)
+
+        holder.titleTextView.text = notification.title
+        holder.messageTextView.text = notification.description
     }
 
     override fun getItemCount(): Int {
         return notifications.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val titleTextView: TextView = itemView.findViewById(R.id.txt_title_notification)
-        private val messageTextView: TextView = itemView.findViewById(R.id.txt_name_notification)
 
-        fun bind(notification: Notification) {
-            titleTextView.text = notification.title
-            messageTextView.text = notification.description
-        }
-    }
 }
