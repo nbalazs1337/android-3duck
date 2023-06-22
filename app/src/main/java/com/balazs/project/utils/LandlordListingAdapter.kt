@@ -11,6 +11,7 @@ import com.balazs.project.data.model.rv.LandlordListing
 import com.balazs.project.presentation.LandlordDetailActivity
 import com.google.gson.Gson
 import java.util.Locale
+import java.util.UUID
 
 class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.LandlordListingViewHolder>() {
 
@@ -25,7 +26,7 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
         val name: TextView = itemView.findViewById(R.id.txt_name_notification)
         val price: TextView = itemView.findViewById(R.id.txt_price_landlord)
         val rating: TextView = itemView.findViewById(R.id.txt_rating_average)
-        var itemId: String? = null
+        var itemId: String? = UUID.randomUUID().toString()
 
 
     }
@@ -102,5 +103,5 @@ class LandlordListingAdapter : RecyclerView.Adapter<LandlordListingAdapter.Landl
         val json = gson.toJson(landlordListings)
         sharedPreferences.edit().putString("landlordListings", json).apply()
     }
-    
+
 }

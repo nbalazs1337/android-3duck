@@ -26,8 +26,7 @@ class LandlordFragment : Fragment(),AddLandlordFragment.AddLandlordListener {
     private lateinit var rv_landlord_new: RecyclerView
     private lateinit var adapter: LandlordListingAdapter
     private lateinit var searchView: SearchView
-    private val landlordListings: MutableList<LandlordListing> = mutableListOf()
-    private val ratingMap: MutableMap<String, Pair<Float, Int>> = mutableMapOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

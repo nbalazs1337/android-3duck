@@ -66,10 +66,6 @@ class LandlordDetailActivity : AppCompatActivity() {
                     // Save the average rating to SharedPreferences
 
                     Log.d("rating", "${itemId}")
-                    Log.d("rating", "${ratingData!!.calculateAverage()}")
-                    Log.d("rating", "${bigAverage}")
-                    Log.d("rating", "${reviewCount}")
-                    Log.d("rating", "${finalResult}")
                     RatingManager.saveRatingData(
                         this@LandlordDetailActivity,
                         itemId,
