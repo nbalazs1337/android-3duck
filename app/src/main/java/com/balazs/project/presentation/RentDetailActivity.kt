@@ -105,11 +105,25 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         //image list recyclerview
         val recyclerViewImages: RecyclerView = findViewById(R.id.rv_photo)
         val imageUrls = intent.getStringArrayListExtra("photosUrls")
-        Log.d("idk", "${imageUrls}")
+        val imageUris = intent.getStringArrayListExtra("photosUris")
+
+
+        if ((imageUrls != null) && imageUrls.isNotEmpty()) {
         recyclerViewImages.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val adapter = imageUrls?.let { ImageAdapter(it) }
         recyclerViewImages.adapter = adapter
+
+        }
+
+        else if (imageUris != null && imageUris.isNotEmpty()) {
+            Log.d("photos", "${imageUris}")
+            recyclerViewImages.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            val adapter = imageUris?.let { ImageAdapter(it)}
+                recyclerViewImages.adapter = adapter
+        }
+
 
         //displayRentDetails()
 
@@ -126,7 +140,7 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
             // Create a FavoriteItem object
             val favoriteItems = FavoriteItemsManager.getFavoriteItems(this).toMutableList()
-            val newFavoriteItem = Favorite(photoUrl, title, city)
+            val newFavoriteItem = Favorite(photoUrl, photoUri, title, city)
             favoriteItems.add(newFavoriteItem)
             FavoriteItemsManager.saveFavoriteItem(this, favoriteItems)
 

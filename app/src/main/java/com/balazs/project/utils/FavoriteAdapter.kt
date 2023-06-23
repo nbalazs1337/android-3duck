@@ -1,5 +1,6 @@
 package com.balazs.project.utils
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,9 +29,14 @@ class FavoriteAdapter(private val favoriteItems: MutableList<Favorite>) :
         holder.titleTextView.text = favoriteItem.title
         holder.cityTextView.text = favoriteItem.city
 
-        Glide.with(holder.itemView.context)
-            .load(favoriteItem.photoUrl)
-            .into(holder.photoImageView)
+        if (favoriteItem.photoUrl != null) {
+            Glide.with(holder.itemView.context)
+                .load(favoriteItem.photoUrl)
+                .into(holder.photoImageView)
+        } else if (favoriteItem.photoUri != null) {
+            val photoUri = Uri.parse(favoriteItem.photoUri)
+            holder.photoImageView.setImageURI(photoUri)
+        }
 
         holder.button.setOnClickListener {
 

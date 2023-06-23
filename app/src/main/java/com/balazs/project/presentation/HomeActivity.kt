@@ -184,7 +184,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 com.balazs.project.R.id.nav_settings -> {
-                    val intent = Intent(this, SettingsActivity::class.java)
+                    val intent = Intent(this, NotificationActivity::class.java)
                     startActivity(intent)
                     true
                 }

@@ -75,8 +75,10 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
             intent.putExtra("price", holder.price.text) // pass any data to the next activity
             val firstPhotoUri = rentListings[0].photoUrl.firstOrNull()
             intent.putExtra("photoUri", firstPhotoUri) // pass any data to the next activity
-            // intent.putExtra("city", holder.title.text) // pass any data to the next activity
-            //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
+            val photosUrls = rentListing.photoUrl// Extract the photo URLs
+            Log.d("idka", "${photosUrls}")
+            intent.putStringArrayListExtra("photosUris", ArrayList(photosUrls))
+
             holder.itemView.context.startActivity(intent)
         }
     }
