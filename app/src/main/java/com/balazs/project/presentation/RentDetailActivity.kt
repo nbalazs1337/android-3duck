@@ -3,6 +3,7 @@ package com.balazs.project.presentation
 import ImageAdapter
 import android.content.Context
 import android.location.Geocoder
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -65,12 +66,35 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         val photoUrl = intent.getStringExtra("photoUrl")
-        Log.d("rent", "${photoUrl}")
+        val photoUri = intent.getStringExtra("photoUri")
+
+
+        Log.d("urls", "${photoUrl}")
+        Log.d("urls", "${photoUri}")
+
         val image: ImageView = findViewById(R.id.iv_background)
-        // Use the retrieved data in your activity
-        Glide.with(this)
-            .load(photoUrl)
-            .into(image)
+
+        if ((photoUrl != null) && photoUrl.isNotEmpty()) {
+            Glide.with(this)
+                .load(photoUrl)
+                .into(image)
+        } else if (photoUri != null && photoUri.isNotEmpty()) {
+            val goodPhotoUri = Uri.parse(photoUri)
+            Log.d("urls", "${goodPhotoUri}")
+            image.setImageURI(goodPhotoUri)
+        } else {
+            // No photo data available, set a default image
+            Glide.with(this)
+                .load(R.drawable.mock)
+                .into(image)
+        }
+
+
+
+
+
+
+
 
 
         // Initialize the MapView

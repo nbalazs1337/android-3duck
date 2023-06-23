@@ -9,31 +9,41 @@ import com.google.gson.reflect.TypeToken
 
 object NotificationStorageManager {
     private const val NOTIFICATION_PREFS_NAME = "notification_prefs"
-    private const val NOTIFICATION_TITLE_KEY = "notification_title"
-    private const val NOTIFICATION_MESSAGE_KEY = "notification_message"
+    private const val NOTIFICATION_LIST_KEY = "notification_list"
 
     private fun getSharedPreferences(context: Context): SharedPreferences {
         return context.getSharedPreferences(NOTIFICATION_PREFS_NAME, Context.MODE_PRIVATE)
     }
 
-    fun saveNotifications(context: Context, title: String, message: String) {
+    fun saveNotifications(context: Context, notifications: List<Notification>) {
         val sharedPreferences = getSharedPreferences(context)
         val editor = sharedPreferences.edit()
-        editor.putString("notification_title", title)
-        editor.putString("notification_message", message)
+        val json = Gson().toJson(notifications)
+        editor.putString(NOTIFICATION_LIST_KEY, json)
         editor.apply()
 
     }
+    fun loadNotifications(context: Context): List<Notification> {
+    val sharedPreferences = getSharedPreferences(context)
+    val json = sharedPreferences.getString(NOTIFICATION_LIST_KEY, null)
 
-    fun loadNotification(context: Context): Notification? {
+    return if (json != null) {
+        // Convert the JSON string to a list of notifications
+        val notifications = Gson().fromJson<List<Notification>>(
+            json,
+            object : TypeToken<List<Notification>>() {}.type
+        )
+
+        notifications
+    } else {
+        emptyList()
+    }
+}
+
+    fun removeNotification(context: Context, notification: Notification) {
         val sharedPreferences = getSharedPreferences(context)
-        val title = sharedPreferences.getString(NOTIFICATION_TITLE_KEY, null)
-        val message = sharedPreferences.getString(NOTIFICATION_MESSAGE_KEY, null)
-
-        return if (title != null && message != null) {
-            Notification(title, message)
-        } else {
-            null
-        }
+        val notifications = ArrayList<Notification>(loadNotifications(context))
+        notifications.remove(notification)
+        saveNotifications(context, notifications)
     }
 }

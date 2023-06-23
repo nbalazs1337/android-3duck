@@ -10,6 +10,7 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
+import com.balazs.project.MyFirebaseMessagingService
 import com.balazs.project.data.model.rv.RentListing
 import com.balazs.project.data.model.rv.WorkerListing
 
@@ -40,6 +41,12 @@ class AddWorkerFragment : DialogFragment() {
         builder.setView(dialogView)
             //.setTitle("Enter Text")
             .setPositiveButton("Add job") { _, _ ->
+
+                val title_notification = "New Job Added!"
+                val message = "Check it out!"
+                val notificationService = MyFirebaseMessagingService()
+                notificationService.generateNotification(requireContext(), title_notification, message)
+
 
                 val service = dialogView.findViewById<EditText>(R.id.et_service).text.toString()
                 val price = dialogView.findViewById<EditText>(R.id.et_price).text.toString()

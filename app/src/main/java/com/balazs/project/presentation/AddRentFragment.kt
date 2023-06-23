@@ -3,18 +3,22 @@ package com.balazs.project.presentation
 import android.app.Activity
 import com.balazs.project.R
 
-
+import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+
 import com.balazs.project.MyFirebaseMessagingService
 import com.balazs.project.data.model.rv.RentListing
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +29,7 @@ class AddRentFragment : DialogFragment() {
 
     companion object {
         private const val GALLERY_REQUEST_CODE = 1001
+        private const val READ_EXTERNAL_STORAGE_REQUEST_CODE = 123
     }
     private val selectedPhotos: MutableList<String> = mutableListOf()
     override fun onAttach(context: Context) {
@@ -48,6 +53,7 @@ class AddRentFragment : DialogFragment() {
         val dialogView = inflater.inflate(R.layout.add_rent, null)
         val button = dialogView.findViewById<Button>(R.id.btn_add_rent)
         button.setOnClickListener {
+            requestStoragePermission()
             openGallery()
         }
 
@@ -58,7 +64,7 @@ class AddRentFragment : DialogFragment() {
 
                 val user = FirebaseAuth.getInstance().currentUser
                 // Send push notification
-                val title_notification = "Someone just added a New Rent!"
+                val title_notification = "New Rent Added!"
                 val message = "Check it out!"
 
 
@@ -87,7 +93,7 @@ class AddRentFragment : DialogFragment() {
                 //editor.putString("floor", floor)
                 editor.putString("description", description)
                 editor.apply()
-                val rentListing = RentListing(title,cartier,street, number, description,selectedPhotos )
+                val rentListing = RentListing(title,cartier,street, number, description,selectedPhotos)
                 addRentListener?.onRentAdded(rentListing)
             }
             .setNegativeButton("Cancel", null)
@@ -98,6 +104,19 @@ class AddRentFragment : DialogFragment() {
     interface AddRentListener {
         fun onRentAdded(rentListing: RentListing)
 
+    }
+    private fun requestStoragePermission() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                READ_EXTERNAL_STORAGE_REQUEST_CODE
+            )
+        }
     }
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

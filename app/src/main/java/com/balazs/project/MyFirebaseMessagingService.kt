@@ -1,5 +1,6 @@
 package com.balazs.project
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -11,6 +12,7 @@ import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import com.balazs.project.data.model.Notification
 import com.balazs.project.presentation.HomeActivity
 import com.balazs.project.presentation.NotificationActivity
 import com.balazs.project.utils.NotificationStorageManager
@@ -35,11 +37,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
 
     }
+    @SuppressLint("RemoteViewLayout")
     fun getRemoteView(title: String, message: String): RemoteViews {
-        val remoteView = RemoteViews("com.balazs.project", R.layout.item_notification)
-        remoteView.setTextViewText(R.id.txt_title_notification, title)
-        remoteView.setTextViewText(R.id.txt_name_notification, message)
-        remoteView.setImageViewResource(R.id.iv_notification, R.drawable.logopng)
+        val remoteView = RemoteViews("com.balazs.project", R.layout.item_notification_firebase)
+        remoteView.setTextViewText(R.id.txt_title_notification2, title)
+        remoteView.setTextViewText(R.id.txt_name_notification2, message)
         Log.d("lets", "yooo")
 
         return remoteView
@@ -51,7 +53,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
         Log.d("lets", "$title")
         Log.d("lets", "$message")
-        NotificationStorageManager.saveNotifications(context, title, message)
+
+        if (title != null && message != null) {
+            val notification = Notification(title, message)
+            val notifications = NotificationStorageManager.loadNotifications(context).toMutableList()
+            notifications.add(notification)
+            NotificationStorageManager.saveNotifications(context, notifications)
+        }
+
 
 
         var builder: NotificationCompat.Builder =

@@ -12,6 +12,7 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
+import com.balazs.project.MyFirebaseMessagingService
 import com.balazs.project.data.model.rv.RentListing
 import java.util.UUID
 
@@ -42,6 +43,15 @@ class AddLandlordFragment : DialogFragment() {
         builder.setView(dialogView)
             //.setTitle("Enter Text")
             .setPositiveButton("Add a Service") { _, _ ->
+
+                val title_notification = "New Service Added!"
+                val message = "Check it out!"
+
+
+                val notificationService = MyFirebaseMessagingService()
+                notificationService.generateNotification(requireContext(), title_notification, message)
+
+
                 val sharedPreferencesPhone = requireContext().getSharedPreferences("MyPrefsPhone", Context.MODE_PRIVATE)
                 val editorPhone = sharedPreferencesPhone.edit()
                 val name = dialogView.findViewById<EditText>(R.id.et_name).text.toString()

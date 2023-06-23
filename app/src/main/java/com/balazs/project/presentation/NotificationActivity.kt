@@ -20,7 +20,7 @@ class NotificationActivity : AppCompatActivity() {
 
     private lateinit var notificationRecyclerView: RecyclerView
     private lateinit var notificationAdapter: NotificationAdapter
-    private val notificationList = mutableListOf<Notification>()
+    private val notificationList = ArrayList<Notification>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -35,9 +35,9 @@ class NotificationActivity : AppCompatActivity() {
         // Initialize the RecyclerView
         notificationRecyclerView = findViewById(R.id.rv_notifications)
         notificationRecyclerView.layoutManager = LinearLayoutManager(this)
-        val notifications = NotificationStorageManager.loadNotification(this)
+        val notifications = NotificationStorageManager.loadNotifications(this)
         if (notifications != null) {
-            notificationList.add(notifications)
+            notificationList.addAll(notifications)
 
         }
         // Set up the adapter
@@ -45,8 +45,9 @@ class NotificationActivity : AppCompatActivity() {
         notificationRecyclerView.adapter = notificationAdapter
         notificationAdapter.notifyDataSetChanged()
 
-        
+
     }
+
 
     }
 

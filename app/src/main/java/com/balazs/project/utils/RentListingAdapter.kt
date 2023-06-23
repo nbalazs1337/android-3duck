@@ -1,5 +1,6 @@
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -52,10 +53,15 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
               .load(photoUri)
               .into(holder.photoImageView)*/
         Log.d("photo", "Photo from adapter 2${rentListing.photoUrl}")
-        if (rentListing.photoUrl != null) {
-            Glide.with(holder.itemView.context)
-                .load(rentListing.photoUrl)
-                .into(holder.img)
+        if (rentListing.photoUrl.isNotEmpty()) {
+            val firstPhotoUrl = rentListing.photoUrl[0]
+            try {
+                holder.img.setImageURI(Uri.parse(firstPhotoUrl))
+            } catch (e: SecurityException) {
+                // Handle the security exception here, for example, show a default image or log an error
+                holder.img.setImageResource(R.drawable.mock)
+                Log.e("RentListingAdapter", "SecurityException: ${e.message}")
+            }
         } else {
             // Set a default image or hide the ImageView
             holder.img.setImageResource(R.drawable.mock)
@@ -67,6 +73,8 @@ class RentListingAdapter : RecyclerView.Adapter<RentListingAdapter.RentListingVi
             intent.putExtra("title", holder.title.text) // pass any data to the next activity
             intent.putExtra("city", holder.city.text) // pass any data to the next activity
             intent.putExtra("price", holder.price.text) // pass any data to the next activity
+            val firstPhotoUri = rentListings[0].photoUrl.firstOrNull()
+            intent.putExtra("photoUri", firstPhotoUri) // pass any data to the next activity
             // intent.putExtra("city", holder.title.text) // pass any data to the next activity
             //intent.putExtra("rooms", holder.title.text) // pass any data to the next activity
             holder.itemView.context.startActivity(intent)
