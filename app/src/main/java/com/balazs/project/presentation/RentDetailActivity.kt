@@ -52,9 +52,15 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         val city: TextView = findViewById(R.id.txt_city_rent)
         city.text = getCity
 
+        val phoneNumber = intent.getStringExtra("phone")
+        val phoneTxt: TextView = findViewById(R.id.txt_numbers)
+        phoneTxt.text = phoneNumber
+        val emailValue = intent.getStringExtra("email")
+        val emailTxt: TextView = findViewById(R.id.txt_email)
+         emailTxt.text = emailValue
+
 
         val getUsaDescription = intent.getStringExtra("description")
-
         val sharedPreferences = getSharedPreferences("MyPrefsDescription", Context.MODE_PRIVATE)
         val getDescription = sharedPreferences.getString("description", "")
         val description: TextView = findViewById(R.id.txt_description)
@@ -89,14 +95,6 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                 .into(image)
         }
 
-
-
-
-
-
-
-
-
         // Initialize the MapView
         mapView = findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
@@ -109,19 +107,17 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
         if ((imageUrls != null) && imageUrls.isNotEmpty()) {
-        recyclerViewImages.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val adapter = imageUrls?.let { ImageAdapter(it) }
-        recyclerViewImages.adapter = adapter
+            recyclerViewImages.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            val adapter = imageUrls?.let { ImageAdapter(it) }
+            recyclerViewImages.adapter = adapter
 
-        }
-
-        else if (imageUris != null && imageUris.isNotEmpty()) {
+        } else if (imageUris != null && imageUris.isNotEmpty()) {
             Log.d("photos", "${imageUris}")
             recyclerViewImages.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            val adapter = imageUris?.let { ImageAdapter(it)}
-                recyclerViewImages.adapter = adapter
+            val adapter = imageUris?.let { ImageAdapter(it) }
+            recyclerViewImages.adapter = adapter
         }
 
 
@@ -132,7 +128,8 @@ class RentDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         btn_img.setOnClickListener {
 
             isFavorite = !isFavorite
-            val heartIcon = if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+            val heartIcon =
+                if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
             btn_img.setImageResource(heartIcon)
             val photoUrl = intent.getStringExtra("photoUrl")
             val title = intent.getStringExtra("title")

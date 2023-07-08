@@ -40,7 +40,7 @@ class Adapter(private val propertyListings: List<Result>) :
         val descriptiveText = buildString {
             // Check if the property has a name
             item.description.name?.let { name ->
-                append("Welcome to $name!\n\n")
+                append("Welcome to $name!\n")
             }
 
             // Describe the number of bedrooms
@@ -67,12 +67,12 @@ class Adapter(private val propertyListings: List<Result>) :
 
             // Describe the type of property
             item.description.type?.let { type ->
-                append("This is a $type.\n")
+                append("This is an $type. and ")
             }
 
             // Describe the year it was built
             item.description.year_built?.let { yearBuilt ->
-                append("It was built in $yearBuilt.\n")
+                append("it was built in $yearBuilt.\n")
             }
 
             // Describe the garage availability
@@ -93,6 +93,20 @@ class Adapter(private val propertyListings: List<Result>) :
             val longitude = item.location.address.coordinate.lon.toString()
             val latitude = item.location.address.coordinate.lat.toString()
             val description = item.description.toString()
+            val phoneNumbers: List<String>? = item.advertisers.getOrNull(1)?.office?.phones
+                ?.filterNotNull()
+                ?.map { it.number }
+
+            val email = item.advertisers.getOrNull(0)?.office?.lead_email?.to
+
+            Log.d("newww", "${phoneNumbers}")
+            Log.d("newww", "${email}")
+
+
+
+
+            intent.putExtra("phone", phoneNumbers?.get(1))
+            intent.putExtra("email", email)
             intent.putExtra("description", descriptiveText)
             intent.putExtra("title", holder.txt_title.text) // pass any data to the next activity
             intent.putExtra("city", holder.txt_city.text) // pass any data to the next activity
