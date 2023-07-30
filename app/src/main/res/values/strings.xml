@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Project</string>
+    <string name="welcome_screen_button">Get Started</string>
+    <string name="register_screen_button">Register me</string>
+    <string name="login_screen_button">Log In</string>
+    <string name="welcome_screen_title">Everything within only one app</string>
+    <string name="welcome_screen_text">Welcome to our app, designed to simplify communication between landlords, workers,and tenants.
+
+
+    </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

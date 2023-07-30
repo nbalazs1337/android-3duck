@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "398388129915",
+    "project_id": "duck-17cfb",
+    "storage_bucket": "duck-17cfb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398388129915:android:69c2b0566b3a1255db72de",
+        "android_client_info": {
+          "package_name": "com.balazs.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398388129915-b6fhmtm25126vq7jrapgtuo0uqcfg685.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.balazs.project",
+            "certificate_hash": "79a17d356eac1989801220eeaa06aafab2d466df"
+          }
+        },
+        {
+          "client_id": "398388129915-nein6cicvq3angj2nb8lfnhkjluj6ch4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOO7r61SB16OkwwaJBxNVISJxQy4892Vk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398388129915-nein6cicvq3angj2nb8lfnhkjluj6ch4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

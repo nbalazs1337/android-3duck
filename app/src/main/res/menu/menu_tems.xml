@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_tenant"
+        android:title="Tenant"
+        android:iconTint="@color/black"
+        android:icon="@drawable/selector_tenant"/>
+    <item
+        android:id="@+id/navigation_landlord"
+        android:title="Landlord"
+        android:icon="@drawable/selector_landlord" />
+    <item
+        android:id="@+id/navigation_worker"
+        android:title="Worker"
+        android:icon="@drawable/selector_worker" />
+</menu>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.balazs.project.TenantFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_tenant" >
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/workerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_chatFragment"
+            app:destination="@id/landlordFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addRentFragment"
+            app:destination="@id/addRentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/landlordFragment"
+        android:name="com.balazs.project.LandlordFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_landlord" />
+    <fragment
+        android:id="@+id/workerFragment"
+        android:name="com.balazs.project.WorkerFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_worker" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.balazs.project.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/addRentFragment"
+        android:name="com.balazs.project.AddRentFragment"
+        android:label="fragment_add_rent"
+        tools:layout="@layout/fragment_add_rent" />
+</navigation>

@@ -1,0 +1,32 @@
+package com.balazs.project.data.model.api
+
+data class Element(
+    val address: String,
+    val age: String,
+    val agency: Boolean,
+    val bathrooms: Int,
+    val country: String,
+    val district: String,
+    val exterior: Boolean,
+    val favourite: Boolean,
+    val floor: String,
+    val hasVideo: Boolean,
+    val latitude: Double,
+    val longitude: Double,
+    val municipality: String,
+    val neighborhood: String,
+    val newDevelopment: Boolean,
+    val newProperty: Boolean,
+    val numPhotos: Int,
+    val operation: String,
+    val price: Int,
+    val propertyCode: String,
+    val propertyType: String,
+    val province: String,
+    val rooms: Int,
+    val showAddress: Boolean,
+    val size: Int,
+    val status: String,
+    val thumbnail: String,
+    val url: String
+)
