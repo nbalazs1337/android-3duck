@@ -8,6 +8,7 @@ Short demo can be found here: https://youtu.be/52zBXfl1bCE
 
 Technologies used:
 
+- USA Rent-Listing API from rapidapi.com
 - Firebase for LogIn and Authentification
 - Retrofit for API Fetching
 - Shared Prefs & Room for data caching
